@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Apple Baked Oatmeal | jafner.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Apple Baked Oatmeal</h1>
+            <hr>
+        </header>
+
+        <main>
+            <nav>
+                <a href="../index.html">Home</a>
+                |
+                <a href="../shareables.html">Shareables</a>
+                |
+                <a href="../toolbox.html">Toolbox</a>
+                |
+                <a href="../recipes">Recipes</a>
+            </nav>
+
+            <div id="about">
+                <h2>About this recipe</h2>
+                <ul>
+                    <li><b>Source: </b> I don't know where this came from, it is on an old handwritten index card</li>
+                    <li>A solid go-to in our house</li>
+                    <li>We usually make it vegan, but any other type of milk works as well</li>
+                </ul>
+            </div>
+
+            <div id="planning">
+                <h2>Planning</h2>
+                <p><b>Prep Time:</b> 10 minutes</p>
+                <p><b>Cook Time:</b> 40 minutes</p>
+                <p><b>Servings:</b> 4 <p>
+            </div> 
+
+            <div id="preparation">
+                <h2>Preparation</h2>
+                <h3>Equipment</h3>
+                <ul>
+                    <li>8"x8" casserole dish</li>
+                    <li>Oven</li>
+                </ul>
+                <h3>Ingredients</h3>
+                <ul>
+                    <li>Oats, 2 cups</li>
+                    <li>Cinnamon, 1 tsp</li>
+                    <li>Baking Powder, 1 tsp</li>
+                    <li>Salt, 1/2 tsp</li>
+                    <li>Soy milk, 2 cups</li>
+                    <li>Applesauce, 1/2 cup</li>
+                    <li>Syrup, 1/4 cup</li>
+                    <li>Ground flaxseed, 1 Tbsp</li>
+                    <li>Coconut oil, 1 Tbsp</li>
+                    <li>Vanilla, 1 tsp</li>
+                    <li>Diced Apple, 1 cup</li>
+                    <ul>
+                        <li>Usually a little less than 1 large apple</li>
+                    </ul>
+                    <li>Raisins, 1/2 cup</li>
+                </ul>
+            </div>
+
+            <div id="cooking">
+                <h2>Cooking</h2>
+                <ol>
+                    <li>Preheat oven to 375°</li>
+                    <li>Mix all dry ingredients in the 8"x8" pan</li>
+                    <li>Add all wet ingredients, mix</li>
+                    <li>Bake 40 minutes</li>
+                </ol>
+
+            </div>
+
+            <div id="notes">
+                <h2>Notes & Tips</h2>
+                <ul>
+                    <li>Any type of milk works, plant based or cow milk</li>
+                    <li>Any type of apple should work, but will change the taste accordingly</li>
+                    <li>Can add 1-2 scoops of unflavored protein powder to make higher protein</li>
+
+                </ul>
+
+            </div>
+
+            <div id="Nutrition">
+                <h2>Nutritition per serving</h2>
+                <ul>
+                    <li><b>Calories:</b> ###</li>
+                    <li><b>Protein:</b> ### g</li>
+                    <li><b>Fat:</b> ### g</li>
+                    <li><b>Carbohydrates:</b> ### g</li>
+                    <li><b>Sugar:</b> ### g</li>
+                    <li><b>Fiber:</b> ### g</li>
+                </ul>
+
+            </div>
+            
+        </main>
+
+        <footer>
+            <hr>
+            <a href="https://www.linkedin.com/in/jeffrey-hafner" target="_blank">LinkedIn</a></li>
+            |
+            <a href="https://github.com/mr-jafner" target="_blank">Github</a>
+            |
+            <a href="https://www.instagram.com/jafner7/" target="_blank">Instagram</a>
+            |
+            <a href="https://bsky.app/profile/mrjafner.bsky.social" target="_blank">Bluesky</a>
+        </footer>
+    </body>
+</html>
