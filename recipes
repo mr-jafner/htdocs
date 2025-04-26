@@ -29,7 +29,7 @@
             <h2>Breakfast</h2>
             <ul>
                 <li><a href="recipes_folder/apple_baked_oatmeal">Apple Baked Oatmeal</a> [Vegan]</li>
-                <li><a>Lemon Blueberry Baked Oatmeal</a> [Vegan]</li>
+                <li><a href="recipes_folder/lemon_blueberry_baked_oatmeal">Lemon Blueberry Baked Oatmeal</a> [Vegan]</li>
                 <li><a>Oatmeal</a> [Vegan]</li>
                 <li><a>Overnight Oats</a> [Vegan]</li>
                 <li><a>High-Protein Breakfast Casserole</a></li>
@@ -38,6 +38,15 @@
             <h2>Lunch & Dinner</h2>
 
             <h2>Snacks</h2>
+            <ul>
+                <li><a>Hummus</a></li>
+                <li>Muffins</li>
+                <ul>
+                    <li>Muffin 1</li>
+                    <li>Muffin 2</li>
+                </ul>
+
+            </ul>
 
             <h2>Desserts</h2>
 
@@ -45,12 +54,12 @@
 
         <footer>
             <a href="https://www.linkedin.com/in/jeffrey-hafner" target="_blank">LinkedIn</a></li>
-                |
-                <a href="https://github.com/mr-jafner" target="_blank">Github</a>
-                |
-                <a href="https://www.instagram.com/jafner7/" target="_blank">Instagram</a>
-                |
-                <a href="https://bsky.app/profile/mrjafner.bsky.social" target="_blank">Bluesky</a>
+            |
+            <a href="https://github.com/mr-jafner" target="_blank">Github</a>
+            |
+            <a href="https://www.instagram.com/jafner7/" target="_blank">Instagram</a>
+            |
+            <a href="https://bsky.app/profile/mrjafner.bsky.social" target="_blank">Bluesky</a>
         </footer>
     </body>
 
