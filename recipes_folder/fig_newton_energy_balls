@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Fig Newton Energy Balls | jafner.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Fig Newton Energy Balls</h1>
+            <hr>
+        </header>
+
+        <main>
+            <nav>
+                <a href="../index.html">Home</a>
+                |
+                <a href="../shareables.html">Shareables</a>
+                |
+                <a href="../toolbox.html">Toolbox</a>
+                |
+                <a href="../recipes">Recipes</a>
+            </nav>
+
+            <div id="about">
+                <h2>About this recipe</h2>
+                <ul>
+                    <li><b>Source: </b> I don't know where this came from, it is on an old handwritten index card</li>
+                    <li>Doesn't necessarily taste like fig newtons, but good</li>
+                    
+                </ul>
+            </div>
+
+            <div id="planning">
+                <h2>Planning</h2>
+                <p><b>Prep Time:</b> ?? minutes</p>
+                <p><b>Cook Time:</b> 90 minutes</p>
+                <p><b>Servings:</b> ?? <p>
+            </div> 
+
+            <div id="preparation">
+                <h2>Preparation</h2>
+                <h3>Equipment</h3>
+                <ul>
+                    <li>Food processor</li>
+                    <li>Refrigerator</li>
+                </ul>
+                <h3>Ingredients</h3>
+                <ul>
+                    <li>Dried figs, stemmed, 1.5 cups</li>
+                    <li>Pitted dates, 1 cup</li>
+                    <li>Old Fashioned Oats, 1.5 cups</li>
+                    <li>Smooth unsalted almond butter, 3 Tbsp</li>
+                    <li>Ground flaxseed, 2 tsp</li>
+                    <li>Orange juice, 1 Tbsp</li>
+                    <li>Vanilla, 1 Tbsp</li>
+                    <li>Cinnamon, 3/4 tsp</li>
+                    <li>Salt, 3/4 tsp</li>
+                    
+                </ul>
+            </div>
+
+            <div id="cooking">
+                <h2>Cooking</h2>
+                <ol>
+                    <li>Soak figs and dates in hot water 20-30 minutes</li>
+                    <li>Pulse dates and fig</li>
+                    <li>Add remaining ingredients, mix</li>
+                    <li>Scoop 1.5 Tbsp portions</li>
+                    <li>Roll into balls, place on cookie sheet</li>
+                    <li>Cover & Regrigerate at least 1 hour</li>
+                </ol>
+
+            </div>
+
+            <div id="notes">
+                <h2>Notes & Tips</h2>
+                <ul>
+                    <li>Yum</li>
+                    
+                </ul>
+
+            </div>
+
+            <div id="Nutrition">
+                <h2>Nutritition per serving</h2>
+                <ul>
+                    <li><b>Calories:</b> ###</li>
+                    <li><b>Protein:</b> ### g</li>
+                    <li><b>Fat:</b> ### g</li>
+                    <li><b>Carbohydrates:</b> ### g</li>
+                    <li><b>Sugar:</b> ### g</li>
+                    <li><b>Fiber:</b> ### g</li>
+                </ul>
+
+            </div>
+            
+        </main>
+
+        <footer>
+            <hr>
+            <a href="https://www.linkedin.com/in/jeffrey-hafner" target="_blank">LinkedIn</a></li>
+            |
+            <a href="https://github.com/mr-jafner" target="_blank">Github</a>
+            |
+            <a href="https://www.instagram.com/jafner7/" target="_blank">Instagram</a>
+            |
+            <a href="https://bsky.app/profile/mrjafner.bsky.social" target="_blank">Bluesky</a>
+        </footer>
+    </body>
+</html>

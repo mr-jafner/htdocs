@@ -31,18 +31,31 @@
                 <li><a href="recipes_folder/apple_baked_oatmeal">Apple Baked Oatmeal</a> [Vegan]</li>
                 <li><a href="recipes_folder/lemon_blueberry_baked_oatmeal">Lemon Blueberry Baked Oatmeal</a> [Vegan]</li>
                 <li><a>Oatmeal</a> [Vegan]</li>
-                <li><a>Overnight Oats</a> [Vegan]</li>
+                <li><a href="https://feelgoodfoodie.net/recipe/overnight-oats/#wprm-recipe-container-8144">Overnight Oats</a> [Vegan]</li>
                 <li><a>High-Protein Breakfast Casserole</a></li>
             </ul>
 
             <h2>Lunch & Dinner</h2>
+            <ul>
+                <li><a href="https://www.allrecipes.com/recipe/13954/addictive-sweet-potato-burritos/">Sweet Potato Burritos</a> [Vegan]</li>
+                <li>Soups, Chilis, & Stews</li>
+                <ul>
+                    <li><a href="https://minimalistbaker.com/1-pot-red-lentil-chili/">One Pot Red Lentil Chili</a> [Vegan]</li>
+                </ul>
+                <li>Handhelds</li>
+                <ul>
+                    <li><a href="https://minimalistbaker.com/best-vegan-pulled-pork-sandwich/">"Pulled Pork" Sandwich</a> [Vegan]</li>
+                </ul>
+
+            </ul>
 
             <h2>Snacks</h2>
             <ul>
                 <li><a>Hummus</a></li>
+                <li><a href="recipes_folder/fig_newton_energy_balls">Fig Newton Energy Balls</a> [Vegan]</li>
                 <li>Muffins</li>
                 <ul>
-                    <li>Muffin 1</li>
+                    <li><a href="https://thenaturalnurturer.com/egg-free-chocolate-butternut-squash-muffins/#recipe">Chocolate Butternut Squash Muffins</a> [Vegan]</li>
                     <li>Muffin 2</li>
                 </ul>
 
