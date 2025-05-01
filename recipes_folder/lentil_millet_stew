@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Lentil & Millet Stew | jafner.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Lentil & Millet Stew</h1>
+            <hr>
+        </header>
+
+        <main>
+            <nav>
+                <a href="../index.html">Home</a>
+                |
+                <a href="../shareables.html">Shareables</a>
+                |
+                <a href="../toolbox.html">Toolbox</a>
+                |
+                <a href="../recipes">Recipes</a>
+            </nav>
+
+            <div id="about">
+                <h2>About this recipe</h2>
+                <ul>
+                    <li><b>Source: </b> I don't know where this came from, it is on a handwritten piece of paper</li>
+                    <li>Will also keep in the freezer (we put in quart jars for 2 servings)</li>
+                    
+                </ul>
+            </div>
+
+            <div id="planning">
+                <h2>Planning</h2>
+                <p><b>Prep Time:</b> 20? minutes</p>
+                <p><b>Cook Time:</b> 25 minutes</p>
+                <p><b>Servings:</b> ?? <p>
+            </div> 
+
+            <div id="preparation">
+                <h2>Preparation</h2>
+                <h3>Equipment</h3>
+                <ul>
+                    <li>Stove</li>
+                    <li>Large pot</li>
+                </ul>
+                <h3>Ingredients</h3>
+                <ul>
+                    <li>Group 1</li>
+                    <ul>
+                        <li>Vegetable broth, 6 cups</li>
+                        <li>Dry green Lentils, 1 cup</li>
+                        <li>Millet, 1/4 cup</li>
+                        <li>Onion, diced, 1 medium</li>
+                        <li>Celery, 1 stalk diced </li>
+                        <li>Carrot, 1 peeled and diced</li>
+                        <li>Garlic, 4 cloves minced</li>
+                        <li>Coriander, 2 tsp</li>
+                        <li>Cumin, 2 tsp</li>
+                        <li>Tumeric, 1/2 tsp</li>
+                        <li>Sage, 1/4 tsp</li>
+                    </ul>
+                    <li>Group 2</li>
+                    <ul>
+                        <li>Yellow miso paste, 1 Tbsp</li>
+                        <li>Collard greens, 7-8 pieces sliced</li>
+                        <li>Salt, 1 tsp</li>
+                    </ul>
+                </ul>
+            </div>
+
+            <div id="cooking">
+                <h2>Cooking</h2>
+                <ol>
+                    <li>Add all Group 1 ingredients to the pot, bring to a boil</li>
+                    <li>Reduce to simmer for 20 minutes</li>
+                    <li>Add all Group 2 ingredients, stir</li>
+                    <li>Let simmer for 5 more minutes</li>
+                    
+                </ol>
+
+            </div>
+
+            <div id="notes">
+                <h2>Notes & Tips</h2>
+                <ul>
+                    <li>Yum</li>
+                    
+                </ul>
+
+            </div>
+
+            <div id="Nutrition">
+                <h2>Nutritition per serving</h2>
+                <ul>
+                    <li><b>Calories:</b> ###</li>
+                    <li><b>Protein:</b> ### g</li>
+                    <li><b>Fat:</b> ### g</li>
+                    <li><b>Carbohydrates:</b> ### g</li>
+                    <li><b>Sugar:</b> ### g</li>
+                    <li><b>Fiber:</b> ### g</li>
+                </ul>
+
+            </div>
+            
+        </main>
+
+        <footer>
+            <hr>
+            <a href="https://www.linkedin.com/in/jeffrey-hafner" target="_blank">LinkedIn</a></li>
+            |
+            <a href="https://github.com/mr-jafner" target="_blank">Github</a>
+            |
+            <a href="https://www.instagram.com/jafner7/" target="_blank">Instagram</a>
+            |
+            <a href="https://bsky.app/profile/mrjafner.bsky.social" target="_blank">Bluesky</a>
+        </footer>
+    </body>
+</html>

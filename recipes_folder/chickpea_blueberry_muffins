@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Chickpea Blueberry Muffins | jafner.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Chickpea Blueberry Muffins</h1>
+            <hr>
+        </header>
+
+        <main>
+            <nav>
+                <a href="../index.html">Home</a>
+                |
+                <a href="../shareables.html">Shareables</a>
+                |
+                <a href="../toolbox.html">Toolbox</a>
+                |
+                <a href="../recipes">Recipes</a>
+            </nav>
+
+            <div id="about">
+                <h2>About this recipe</h2>
+                <ul>
+                    <li><b>Source: </b> I don't know where this came from, it is on a handwritten piece of paper</li>
+                    
+                </ul>
+            </div>
+
+            <div id="planning">
+                <h2>Planning</h2>
+                <p><b>Prep Time:</b> 10 minutes</p>
+                <p><b>Cook Time:</b> 25 minutes</p>
+                <p><b>Servings:</b> ? <p>
+            </div> 
+
+            <div id="preparation">
+                <h2>Preparation</h2>
+                <h3>Equipment</h3>
+                <ul>
+                    <li>Muffin tin</li>
+                    <li>Food processor</li>
+                    <li>microwave</li>
+                    <li>Oven</li>
+                </ul>
+                <h3>Ingredients</h3>
+                <ul>
+                    <li>Garbanzo beans (chickpeas), 15oz rinsed and drained</li>
+                    <li>Medjool dates, 1 cups</li>
+                    <li>Oats, 1/2 cup</li>
+                    <li>Eggs, 3</li>
+                    <li>Vanilla, 1 tsp</li>
+                    <li>Coconut oil, melted, 1/4 cup</li>
+                    <li>Baking powder, 1 tsp</li>
+                    <li>Baking soda, 1 tsp</li>
+                    <li>Fresh Blueberries, 1.5 cups</li>
+                    
+                </ul>
+            </div>
+
+            <div id="cooking">
+                <h2>Cooking</h2>
+                <ol>
+                    <li>Preheat oven to 350°</li>
+                    <li>Grease muffin tin</li>
+                    <li>Place dates in bowl with 1 cup water, microwave on high for 2 minutes; drain water</li>
+                    <li>Process dates and chickpeas until smooth</li>
+                    <li>Add remaining of ingredients <b>except blueberries</b> and process into batter</li>
+                    <li>Stir in blueberries</li>
+                    <li>Spoon into muffin tin</li>
+                    <li>Bake 20-25 minutes</li>
+                </ol>
+
+            </div>
+
+            <div id="notes">
+                <h2>Notes & Tips</h2>
+                <ul>
+                    <li>Yum</li>
+
+                </ul>
+
+            </div>
+
+            <div id="Nutrition">
+                <h2>Nutritition per serving</h2>
+                <ul>
+                    <li><b>Calories:</b> ###</li>
+                    <li><b>Protein:</b> ### g</li>
+                    <li><b>Fat:</b> ### g</li>
+                    <li><b>Carbohydrates:</b> ### g</li>
+                    <li><b>Sugar:</b> ### g</li>
+                    <li><b>Fiber:</b> ### g</li>
+                </ul>
+
+            </div>
+            
+        </main>
+
+        <footer>
+            <hr>
+            <a href="https://www.linkedin.com/in/jeffrey-hafner" target="_blank">LinkedIn</a></li>
+            |
+            <a href="https://github.com/mr-jafner" target="_blank">Github</a>
+            |
+            <a href="https://www.instagram.com/jafner7/" target="_blank">Instagram</a>
+            |
+            <a href="https://bsky.app/profile/mrjafner.bsky.social" target="_blank">Bluesky</a>
+        </footer>
+    </body>
+</html>

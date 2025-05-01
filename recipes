@@ -28,19 +28,23 @@
 
             <h2>Breakfast</h2>
             <ul>
-                <li><a href="recipes_folder/apple_baked_oatmeal">Apple Baked Oatmeal</a> [Vegan]</li>
-                <li><a href="recipes_folder/lemon_blueberry_baked_oatmeal">Lemon Blueberry Baked Oatmeal</a> [Vegan]</li>
-                <li><a>Oatmeal</a> [Vegan]</li>
-                <li><a href="https://feelgoodfoodie.net/recipe/overnight-oats/#wprm-recipe-container-8144">Overnight Oats</a> [Vegan]</li>
+                <li>Oats</li>
+                <ul>
+                    <li><a href="recipes_folder/apple_baked_oatmeal">Apple Baked Oatmeal</a> [Vegan]</li>
+                    <li><a href="recipes_folder/lemon_blueberry_baked_oatmeal">Lemon Blueberry Baked Oatmeal</a> [Vegan]</li>
+                    <li><a>Oatmeal</a> [Vegan]</li>
+                    <li><a href="https://feelgoodfoodie.net/recipe/overnight-oats/#wprm-recipe-container-8144">Overnight Oats (external)</a> [Vegan]</li>
+                </ul>
                 <li><a>High-Protein Breakfast Casserole</a></li>
             </ul>
 
             <h2>Lunch & Dinner</h2>
             <ul>
-                <li><a href="https://www.allrecipes.com/recipe/13954/addictive-sweet-potato-burritos/">Sweet Potato Burritos</a> [Vegan]</li>
+                <li><a href="https://www.allrecipes.com/recipe/13954/addictive-sweet-potato-burritos/">Sweet Potato Burritos (external)</a> [Vegan]</li>
                 <li>Soups, Chilis, & Stews</li>
                 <ul>
-                    <li><a href="https://minimalistbaker.com/1-pot-red-lentil-chili/">One Pot Red Lentil Chili</a> [Vegan]</li>
+                    <li><a href="https://minimalistbaker.com/1-pot-red-lentil-chili/">One Pot Red Lentil Chili (external)</a> [Vegan]</li>
+                    <li><a href="recipes_folder/lentil_millet_stew">Lentil & Millet Stew</a> [Vegan]</li>
                 </ul>
                 <li>Handhelds</li>
                 <ul>
@@ -55,8 +59,14 @@
                 <li><a href="recipes_folder/fig_newton_energy_balls">Fig Newton Energy Balls</a> [Vegan]</li>
                 <li>Muffins</li>
                 <ul>
-                    <li><a href="https://thenaturalnurturer.com/egg-free-chocolate-butternut-squash-muffins/#recipe">Chocolate Butternut Squash Muffins</a> [Vegan]</li>
-                    <li>Muffin 2</li>
+                    <li><a href="https://thenaturalnurturer.com/egg-free-chocolate-butternut-squash-muffins/#recipe">Chocolate Butternut Squash Muffins (external)</a> [Vegan]</li>
+                    <li><a href="recipes_folder/chickpea_blueberry_muffins">Chickpea Blueberry Muffins</a></li>
+                    <li><a href="recipes_folder/pumpkin_muffins">Pumpkin Muffins</a></li>
+                    <li><a href="recipes_folder/blueberry_lassy_muffins">Blueberry Lassy Muffins</a> [Vegan]</li>
+                </ul>
+                <li>Smoothies</li>
+                <ul>
+                    <li><a href="recipes_folder/green_smoothie">Green Smoothie</a> [Vegan]</li>
                 </ul>
 
             </ul>
