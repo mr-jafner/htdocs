@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Chocolate Muffins | jafner.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Chocolate Orange Muffins</h1>
+            <hr>
+        </header>
+
+        <main>
+            <nav>
+                <a href="../index.html">Home</a>
+                |
+                <a href="../shareables.html">Shareables</a>
+                |
+                <a href="../toolbox.html">Toolbox</a>
+                |
+                <a href="../recipes">Recipes</a>
+            </nav>
+
+            <div id="about">
+                <h2>About this recipe</h2>
+                <ul>
+                    <li><b>Source: </b> From <a href="https://www.amazon.com/gp/product/1941631045/ref=as_li_qf_asin_il_tl?ie=UTF8&creative=9325&creativeASIN=1941631045">Plant Powered Familes by Dreena Burton (Amazon link)</a>, Double Chocolate Orange Banana Muffins (page 55)</li>
+                    
+                </ul>
+            </div>
+
+            <div id="planning">
+                <h2>Planning</h2>
+                <p><b>Prep Time:</b> X minutes</p>
+                <p><b>Cook Time:</b> 17-19 minutes</p>
+                <p><b>Servings:</b> 11-12 muffins <p>
+            </div> 
+
+            <div id="preparation">
+                <h2>Preparation</h2>
+                <h3>Equipment</h3>
+                <ul>
+                    <li>Muffin pan</li>
+                    <li>Oven</li>
+
+                    
+                </ul>
+                <h3>Ingredients</h3>
+                <ul>
+                    <li>Whole-grain spelt flour, 1 1/2 cups (195 g)</li>
+                    <li>Almond flour, 1/2 cup</li>
+                    <li>Cocoa powder, 1/4 cup</li>
+                    <li>Orange zest, 1 1/2 - 2 tsp</li>
+                    <ul>
+                        <li>From 1 large or 2 small oranges</li>
+                    </ul>
+                    <li>Sea salt, 1/4 rounded tsp</li>
+                    <li>Baking powder, 1 1/2 tsp</li>
+                    <li>Baking soda, 1/4 tsp</li>
+                    <li>Pureed overripe banana, 1 cup</li>
+                    <ul>
+                        <li>Should be about 2 large overripe bananas</li>
+                    </ul>
+                    <li>Freshly squeezed orange juice, 1/2 cup</li>
+                    <li>Maple syrup, 1/2 cup</li>
+                    <li>Vanilla extract, 2 tsp</li>
+                    <li>Non-dairy mini or regular chocolate chips, 1/4 cup</li>
+                    
+                </ul>
+            </div>
+
+            <div id="cooking">
+                <h2>Cooking</h2>
+                <ol>
+                    <li>Preheat oven to 350deg</li>
+                    <li>In large bowl combine flours, cocoa powder, orange zest, and sea salt</li>
+                    <li>Sift in the baking powder and baking soda</li>
+                    <li>In a medium bowl, combine pureed banana, orange juice, maple syrup, and vanilla extract - mix all together</li>
+                    <li>Fold the wet mixture into the dry mixture</li>
+                    <li>Add in chocolate chips</li>
+                    <li>Stir until just combined</li>
+
+                    <li>Put in muffin tin</li>
+                    <li>Cook for 17-19 minutes, or until a toothpick inserted in the center comes out clean</li>
+                    
+                </ol>
+
+            </div>
+
+            <div id="notes">
+                <h2>Notes & Tips</h2>
+                <ul>
+                    <li>Yum</li>
+                    
+                </ul>
+
+            </div>
+
+            <div id="Nutrition">
+                <h2>Nutritition per serving</h2>
+                <ul>
+                    <li><b>Calories:</b> ###</li>
+                    <li><b>Protein:</b> ### g</li>
+                    <li><b>Fat:</b> ### g</li>
+                    <li><b>Carbohydrates:</b> ### g</li>
+                    <li><b>Sugar:</b> ### g</li>
+                    <li><b>Fiber:</b> ### g</li>
+                </ul>
+
+            </div>
+            
+        </main>
+
+        <footer>
+            <hr>
+            <a href="https://www.linkedin.com/in/jeffrey-hafner" target="_blank">LinkedIn</a></li>
+            |
+            <a href="https://github.com/mr-jafner" target="_blank">Github</a>
+            |
+            <a href="https://www.instagram.com/jafner7/" target="_blank">Instagram</a>
+            |
+            <a href="https://bsky.app/profile/mrjafner.bsky.social" target="_blank">Bluesky</a>
+        </footer>
+    </body>
+</html>
