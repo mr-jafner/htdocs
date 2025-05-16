@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Recipes | jafner.com</title>
+        <title>Food | jafner.com</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
@@ -9,7 +9,7 @@
 
     <body>
         <header>
-            <h1>Recipes</h1>
+            <h1>Food</h1>
             <hr>
         </header>
 
@@ -21,10 +21,10 @@
                 |
                 <a href="toolbox.html">Toolbox</a>
                 |
-                <a href="recipes">Recipes</a>
+                <a href="recipes">Food</a>
             </nav>
             
-            <p>Common Recipes in our House</p>
+            <p>These are foods we buy and/or make in our house - below are links to existing websites where available and copied recipes otherwise (attribution provided as much as possible)</p>
 
             <h2>Breakfast</h2>
             <ul>
@@ -55,8 +55,9 @@
 
             <h2>Snacks</h2>
             <ul>
-                <li><a>Hummus</a></li>
+                <li><a href="recipes_folder/hummus_lentil">Red Lentil Hummus</a> [Vegan]</li>
                 <li><a href="recipes_folder/fig_newton_energy_balls">Fig Newton Energy Balls</a> [Vegan]</li>
+                <li><a href="recipes_folder/banana_snackies">Banana Snackies</a> [Vegan]</li>
                 <li><a href="recipes_folder/banana_bread">Banana Bread</a> [Vegan]</li>
                 <li>Muffins</li>
                 <ul>
