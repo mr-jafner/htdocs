@@ -14,126 +14,209 @@
         </header>
 
         <main>
-            <nav>
-                <a href="index.html">Home</a>
-                |
-                <a href="#top">Shareables</a>
-                |
-                <a href="toolbox.html">Toolbox</a>
-                |
-                <a href="recipes">Food</a>
-            </nav>
+            
+            <div id="nav-placeholder"></div>
 
-            <div id="products">
+            <section id="products" class="content-section">
                 <h2>Products</h2>
-                <ul>
-                    <li><a href="https://a.co/d/hpeG8Ur">Accupressure Mat</a> - this isn't the exact one I have, but they all should be about the same.... and they do wonders</li>
-                    <li>other things</li>
-                </ul>
-            </div>
+                <div class="items-container">
+                    <article class="product-item">
+                        <h3 class="product-title">Accupressure Mat</h3>
+                        <p class="product-description">This isn't the exact one I have, but they all should be about the same.... and they do wonders</p>
+                        <a href="https://a.co/d/hpeG8Ur" class="product-link" target="_blank">Buy on Amazon</a>
+                    </article>
+                    
+                </div>
+            </section>
 
-            <div id="book_section">
+            <section id="books" class="content-section">
                 <h2>Books</h2>
 
-                <h3>Understanding the World:</h3>
-                <ul>
-                    <li>Factfulness by Hans Rosling</li>
-                    <ul>                        
-                        <li><b>Why to read this:</b> This book outlines how to really understand the world around us, with approachable statistical frameworks</li>
-                        <li><b>Bonus 1:</b> Take <a href="https://upgrader.gapminder.org/">this quiz</a> before you read the book</li>
-                        <li><b>Bonus 2:</b> Check out some TED talks from Hans Rosling</li>
-                        <ul>
-                            <li><a>Talk 1</a></li>
-                            <li><a>Talk 2</a></li>
-                        </ul>
-                        <li><a href="https://www.gapminder.org/factfulness-book/">Book Website</a></li>
-                    </ul>
-                    <li>Clear Thinking by Shane Parish</li>
-                    <ul>
-                        <li><b>Why to read this:</b> Outlines how to understand when you're making a decision and how to think through decisions - applicable from day to day life and up to the big decisions</li>
-                        <li><a href="https://fs.blog/clear/">Book Site</a></li>
-                    </ul>
-                    <li>The Great Mental Models Vol 1 by Shane Parrish</li>               
-                    <ul>
-                        <li><b>Why to read this:</b> The whole series is a great reference, but I feel the first is the biggest value for building a base of mental models</li>
-                        <li><a href="https://fs.blog/tgmm/">Book Series Site</a></li>
-                    </ul>
-                </ul>
+                <section class ="category-group">
+                    <h3>Understanding the World:</h3>
+                    <div class="items-container">
+                        <article id= "factfulness" class="book-item">
+                            <h4 class="book-title">Factfulness</h4>
+                            <p class="book-author">by Hans Rosling</p>
+                            <p class="book-description"><strong>Why to read this:</strong> This book outlines how to really understand the world around us, with approachable statistical frameworks</p>
+                            <p class="book-bonus"><strong>Bonus:</strong> Take <a href="https://upgrader.gapminder.org/" target="_blank">this quiz</a> before you read the book</p>
+                            <a href="https://www.gapminder.org/factfulness-book/" class="book-link" target="_blank">Book Website</a>
+                        </article>
 
-                <h3>Understanding Yourself:</h3>
-                <ul>                    
-                    <li>Peace is Every Step by Thich Nhat Han</li>
-                    <ul>
-                        <li><b>Why to read this:</b> This book made mindfulness click for me - I found it integral in walking steady</li>
-                        <li><a href="https://a.co/d/6E15bTo">Buy the book</a></li>
-                    </ul>
-                    <li id="grief">On Grief & Grieving by Elizabeth Kubler-Ross</li>
-                    <ul>
-                        <li><b>Why to read this:</b>The first chapter alone should be mandatory reading for everyone - the rest of the book is to help process</li>
-                        <li><a href="https://www.simonandschuster.com/books/On-Grief-and-Grieving/Elisabeth-Kubler-Ross/9781476775555">Buy the book</a></li>
-                    </ul>
-                    <li>The Architecture of Happiness by Alain de Botton</li>
-                </ul>
+                        <article class="book-item">
+                            <h4 class="book-title">Clear Thinking</h4>
+                            <p class="book-author">by Shane Parish</p>
+                            <p class="book-description"><strong>Why to read this:</strong> Outlines how to understand when you're making a decision and how to think through decisions - applicable from day to day life and up to the big decisions</p>
+                            <a href="https://fs.blog/clear/" class="book-link">Book Site</a>
+                        </article>
 
-                <h3>Living in the World:</h3>
-                <ul>
-                    <li>I Will Teach You to be Rich by Ramit Sethi</li>
-                    <li>Getting to Yes by Roger Fisher</li>
-                    <li>Charisma Myth</li>
-                    <li>The Fine Art of Small Talk by Debra Fine</li>
-                </ul>
+                        <article class="book-item">
+                            <h4 class="book-title">The Great Mental Models Vol 1</h4>
+                            <p class="book-author">by Shane Parrish</p>
+                            <p class="book-description"><strong>Why to read this:</strong> The whole series is a great reference, but I feel the first is the biggest value for building a base of mental models</p>
+                            <a href="https://fs.blog/tgmm/" class="book-link">Book Series Site</a>
+                        </article>
+                    </div>
+                </section>
 
+                <section class="category-group">
+                    <h3>Understanding Yourself:</h3>
+                    <div class="items-container">
+                        <article id="peace" class="book-item">
+                            <h4 class="book-title">Peace is Every Step</h4>
+                            <p class="book-author">by Thich Nhat Hanh</p>
+                            <p class="book-description"><strong>Why to read this:</strong> This book made mindfulness click for me - I found it integral in walking steady</p>
+                            <a href="#" data-bookshop-id="9780553351392" target="_blank">Bookshop.org</a>
+                        </article>  
+                        <article id="on-grief" class="book-item">
+                            <h4 class="book-title">On Grief & Grieving</h4>
+                            <p class="book-author">by Elizabeth Kubler-Ross</p>
+                            <p class="book-description"><strong>Why to read this:</strong> The first chapter alone should be mandatory reading for everyone - the rest of the book is to help process</p>
+                            <a href="#" data-bookshop-id="9781476775555" target="_blank">Bookshop.org</a>
+                        </article>
+                        <article id="architecture-happiness" class="book-item">
+                            <h4 class="book-title">The Architecture of Happiness</h4>
+                            <p class="book-author">by Alain de Botton</p>   
+                            <p class="book-description"><strong>Why to read this:</strong> A good read to keep you thinking both about your external environment and your internal state.</p>
+                            <a href="#" data-bookshop-id="9780307277244" target="_blank">Bookshop.org</a>
+                        </article>
+                        <article id="perfect" class="book-item">
+                            <h4 class="book-title">How to be Perfect</h4>
+                            <p class="book-author">by Michael Schur</p>
+                            <p class="book-description"><strong>Why to read this:</strong> A fun look at moral ethics from the creator of <i>The Good Place</i>... yes, fun.</p>
+                            <a href="#" data-bookshop-id="9781982159320" target="_blank">Bookshop.org</a>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="category-group">
+                    <h3>Living in the World:</h3>
+                    <div class="items-container">
+                        <article id="iwty" class="book-item">
+                            <h4 class="book-title">I Will Teach You to be Rich</h4>
+                            <p class="book-author">by Ramit Sethi</p>
+                            <p class="book-description"><strong>Why to read this:</strong> This book took me from no idea what to do with money to feeling in control of my finances - should be required reading for everyone</p>
+                            <a href="#" data-bookshop-id="9781523505746" target="_blank">Bookshop.org</a>
+                        </article>
+                        <article id="getting-to-yes" class="book-item">
+                            <h4 class="book-title">Getting to Yes</h4>
+                            <p class="book-author">by Roger Fisher</p>  
+                            <p class="book-description"><strong>Why to read this:</strong> A great book on negotiation tactics that can be applied in everyday life.</p>
+                            <a href="#" data-bookshop-id="9780143118756" target="_blank">Bookshop.org</a>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="category-group">
                 <h3>Fun & Interesting:</h3>
-                <ul>
-                    <li>How to Invent Everything by Ryan North</li>
-                    <ul>
-                        <li><b>Why to read this:</b> This is just a fun book walking through how to reinvent many common parts of civilization from scratch, from a great comics writer</li>
-                    </ul>
-                    <li>A City on Mars by the Weinersmiths</li>
-                    <li>Sapiens by Yual Noah Harari</li>
-                    <li>Understanding Exposure by Brian Peterson</li>
-                    <ul>
-                        <li><b>Why to read this:</b> This book gave me understanding of how to setup taking photos when I first got my DSLR, and then I could explore from there</li>
-                    </ul>
-                </ul>
+                    <div class="items-container">
+                        <article id="invent-everything" class="book-item">
+                            <h4 class="book-title">How to Invent Everything</h4>
+                            <p class="book-author">by Ryan North</p>   
+                            <p class="book-description"><strong>Why to read this:</strong> This is just a fun book walking through how to reinvent many common parts of civilization from scratch, from a great comics writer</p>
+                            <a href="#" data-url="howtoinventeverything.com" target="_blank">Book Site</a>
+                        </article>
+                        <article id="city-mars" class="book-item">
+                            <h4 class="book-title">A City on Mars</h4>
+                            <p class="book-author">by the Weinersmiths</p> 
+                            <p class="book-description"><strong>Why to read this:</strong> A fun pop-science book exploring the possibilities and challenges of living off Earth.</p>
+                            <a href="#" data-url="https://www.acityonmars.com/" target="_blank">Book Site</a>
+                        </article>
+                        <article id="sapiens" class="book-item">
+                            <h4 class="book-title">Sapiens</h4>
+                            <p class="book-author">by Yuval Noah Harari</p> 
+                            <p class="book-description"><strong>Why to read this:</strong> A sweeping overview of human history from our origins to the present day.</p>
+                            <a href="#" data-bookshop-id="9780063422001" target="_blank">Bookshop.org</a>
+                        </article>
+                        <article id="understanding-exposure" class="book-item">
+                            <h4 class="book-title">Understanding Exposure</h4>
+                            <p class="book-author">by Brian Peterson</p>   
+                            <p class="book-description"><strong>Why to read this:</strong> This book gave me understanding of how to setup taking photos when I first got my DSLR, and then I could explore from there</p>
+                            <a href="#" data-bookshop-id="9781607748502" target="_blank">Bookshop.org</a>
+                        </article>
+                    </div>
+                </section>
 
                 <hr>
-            </div>
+            </section>
             
-            <div id="podcast_section">
+            <section id="podcasts" class="content-section">
                 <h2>Podcasts</h2>
-                <ul>
-                    <li>The End of the World with Josh Clark</li>
-                    <ul>
-                        <li><b>Why to listen:</b> Josh is a great host walking through interesting problems we may face</li>
-                        <li>Originally released in 2017, it is still relevant today</li>
-                        <li><a href="https://www.iheart.com/podcast/105-the-end-of-the-world-with-30006093/">iHeart Radio</a></li>
-                    </ul>
-                    <li>Hardcore History with Dan Carlin</li>
-                    <li>The Knowledge Project</li>
-                    <li>The Art of Manliness</li>
-                    <li>The Tim Ferriss Show</li>
-                    <li>What Roman Mars Can Learn About Con Law</li>
-                    <li>James Bonding</li>
-                </ul>
-
-
-                
-
+                <div class="items-container">
+                    <article class="podcast-item">
+                        <h3 class="podcast-title">The End of the World with Josh Clark</h3>
+                        <p class="podcast-description"><strong>Why to listen:</strong> Josh is a great host walking through interesting problems we may face in the future and how we might solve them - 
+                                Originally released in 2017, it is still relevant today</p>
+                        <a href="#" data-url="https://www.iheart.com/podcast/105-the-end-of-the-world-with-30006093/" target="_blank">Listen Now</a>
+                    </article>
+                    <article class="podcast-item">
+                        <h3 class="podcast-title">Hardcore History with Dan Carlin</h3>
+                        <p class="podcast-description"><strong>Why to listen:</strong> A long-form deep dive history podcast that approaches history as an amazing story</p>
+                        <a href="#" data-url="https://www.dancarlin.com/hardcore-history-series/" target="_blank">Listen Now</a>
+                    </article>
+                    <article class ="podcast-item">
+                        <h3 class="podcast-title">The Knowledge Project</h3>
+                        <p class="podcast-description"><strong>Why to listen:</strong> Shane explores how people succeed, specifically how their mental approaches get them there</p>
+                        <a href="#" data-url="https://fs.blog/knowledge-project/" target="_blank">Listen Now</a>
+                    </article>
+                    <article class="podcast-item">
+                        <h3 class="podcast-title">The Art of Manliness</h3>
+                        <p class="podcast-description"><strong>Why to listen:</strong> The podcast covvers a wide range of topics - not every episode is for everyone, but there are always good ones to find</p>
+                        <a href="#" data-url="https://www.artofmanliness.com/podcast/" target="_blank">Listen Now</a>
+                    </article>
+                    <article class="podcast-item">
+                        <h3 class="podcast-title">The Tim Ferriss Show</h3>
+                        <p class="podcast-description"><strong>Why to listen:</strong> Tim interviews high performers across many fields to extract their routines, habits, and tools</p>
+                        <a href="#" data-url="https://tim.blog/podcast/" target="_blank">Listen Now</a>
+                    </article>
+                    <article class="podcast-item">
+                        <h3 class="podcast-title">What Roman Mars Can Learn About Con Law</h3>
+                        <p class="podcast-description"><strong>Why to listen:</strong> A podcast about design and architecture, exploring the often overlooked aspects of our world</p>
+                        <a href="#" data-url="https://99percentinvisible.org/episodes/what-roman-mars-can-learn-about-con-law/" target="_blank">Listen Now</a>
+                    </article>
+                    <article class="podcast-item">
+                        <h3 class="podcast-title">James Bonding</h3>
+                        <p class="podcast-description"><strong>Why to listen:</strong> A fun podcast diving into the James Bond movies, hosted by comedy greats Matt Mira and Brian Ibbott</p>
+                        <a href="#" data-url="https://podcasts.apple.com/us/podcast/james-bonding/id695880236" target="_blank">Listen Now</a>
+                    </article>
+                </div>
                 <hr>
-            </div>
+            </section>
 
         </main>
 
 
-        <footer>
-            <a href="https://www.linkedin.com/in/jeffrey-hafner" target="_blank">LinkedIn</a></li>
-            |
-            <a href="https://github.com/mr-jafner" target="_blank">Github</a>
-            |
-            <a href="https://www.instagram.com/jafner7/" target="_blank">Instagram</a>
-            |
-            <a href="https://bsky.app/profile/mrjafner.bsky.social" target="_blank">Bluesky</a>
-        </footer>
+        <div id="footer-placeholder"></div>
+
+
+        <script>
+            // Set your affiliate ID once here
+            const affiliateId = "118423";
+
+            // Handle all Bookshop.org affiliate links
+            document.querySelectorAll('[data-bookshop-id]').forEach(link => {
+                const isbn = link.getAttribute('data-bookshop-id');
+                link.href = `https://bookshop.org/a/${affiliateId}/${isbn}`;
+            });
+
+            // Handle all direct URL links
+            document.querySelectorAll('[data-url]').forEach(link => {
+                const url = link.getAttribute('data-url');
+                // Add https:// if not present
+                link.href = url.startsWith('http') ? url : `https://${url}`;
+            });
+        </script>
+
+        <script>
+            // Load navigation
+            fetch('common/nav.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('nav-placeholder').innerHTML = data);
+            
+            // Load footer
+            fetch('common/footer.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+        </script>
     </body>
 </html>
