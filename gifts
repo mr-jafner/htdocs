@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shareables | jafner.com</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1><a href="index.html">jafner.com</a></h1>
+            <hr>
+        </header>
+
+        <main>
+            
+            <div id="nav-placeholder"></div>
+
+            <section id="gifts" class="content-section">
+                <h2>Gift Ideas for Jeff</h2>
+                <p>Here are some ideas of things I might want</p>
+                <div class="items-container">
+                    <article class="gift-item">
+                        <h3 class="gift-title">Acmer S1 6W Laser Engraver</h3>
+                        <p class="gift-description">From what I've found, this is probably the best option for an entry level laser engraver that still has enough power to do interesting work. 
+                            I have a few specific projects in mind, but don't want to go overboard with the engraver until I've tried it out for a while.
+                            Accessories are also important to consider, as they can greatly enhance the functionality and versatility of the engraver.</p>
+                        <a href="https://acmerlaser.com/products/portable-laser-engraver-mini-machine?variant=46408807350498" class="gift-link" target="_blank">Acmer's Site</a>   
+                    </article>
+                    <article class="gift-item">
+                        <h3 class="gift-title">Acmer Honeycomb</h3>
+                        <p class="gift-description"><strong>This is only useful to use with a laser engraver - </strong>> that said, it should improve the quality of the engraving</p>
+                        <a href="https://acmerlaser.com/products/laser-honeycomb-working-bed-acmer?variant=44563046334690" class="gift-link" target="_blank">Acmer's Site</a>
+                    </article>
+                    
+                    <article class="gift-item">
+                        <h3 class="gift-title">Dado set & plate</h3>
+                        <p class="gift-description">A dado set is for making grooves in wood - good for joinery. Does require the plate as well</p>
+                        <p><a href="https://a.co/d/92BBLnl" class="gift-link" target="_blank">Dado blades</a></p>
+                        <a href="https://a.co/d/cBdIoyY" class="gift-link" target="_blank">Dado plate</a>
+                    </article>
+                
+                </div>
+            </section>
+
+           
+        
+        </main>
+
+
+        <div id="footer-placeholder"></div>
+
+        <script>
+            // Load navigation
+            fetch('common/nav.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('nav-placeholder').innerHTML = data);
+            
+            // Load footer
+            fetch('common/footer.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+        </script>
+    </body>
+</html>
