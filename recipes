@@ -14,15 +14,7 @@
         </header>
 
         <main>
-            <nav>
-                <a href="index.html">Home</a>
-                |
-                <a href="shareables.html">Shareables</a>
-                |
-                <a href="toolbox.html">Toolbox</a>
-                |
-                <a href="recipes">Food</a>
-            </nav>
+            <div id="nav-placeholder"></div>
             
             <p>These are foods we buy and/or make in our house - below are links to existing websites where available and copied recipes otherwise (attribution provided as much as possible)</p>
 
@@ -79,15 +71,19 @@
 
         </main>
 
-        <footer>
-            <a href="https://www.linkedin.com/in/jeffrey-hafner" target="_blank">LinkedIn</a></li>
-            |
-            <a href="https://github.com/mr-jafner" target="_blank">Github</a>
-            |
-            <a href="https://www.instagram.com/jafner7/" target="_blank">Instagram</a>
-            |
-            <a href="https://bsky.app/profile/mrjafner.bsky.social" target="_blank">Bluesky</a>
-        </footer>
+        <div id="footer-placeholder"></div>
+
+        <script>
+            // Load navigation
+            fetch('common/nav.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('nav-placeholder').innerHTML = data);
+            
+            // Load footer
+            fetch('common/footer.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+        </script>
     </body>
 
 
