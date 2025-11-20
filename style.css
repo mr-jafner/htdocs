@@ -116,3 +116,13 @@ a:visited {
 .category-group:first-of-type {
   margin-top: 1em;
 }
+
+main {
+  counter-reset: section -1;
+}
+
+article.toc_item h3::before {
+  counter-increment: section;
+  content: counter(section) ". ";
+  
+}

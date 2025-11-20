@@ -35,6 +35,12 @@
                     </article>
                     
                     <article class="gift-item">
+                        <h3 class="gift-title">Darn Tough socks - Size: Medium</h3>
+                        <p class="gift-description">My current favorite socks - very durable so far and comfortable, any of their styles should do, though prefer not black socks</p>
+                        <p><a href="https://darntough.com/" class="gift-link" target="_blank">Darn Tough's Site</a></p>
+                    </article>
+
+                    <article class="gift-item">
                         <h3 class="gift-title">Dado set & plate</h3>
                         <p class="gift-description">A dado set is for making grooves in wood - good for joinery. Does require the plate as well</p>
                         <p><a href="https://a.co/d/92BBLnl" class="gift-link" target="_blank">Dado blades</a></p>
