@@ -116,10 +116,84 @@
 
              <article id="how_to_run_code" class="toc_item">
                 <h3>How to Run Code</h3>
+                <h4>Objectives</h4>
+                <ul>
+                    <li>Understand how to run Python code in different environments</li>
+                    <li>Learn the basics of using an IDE (VSCode)</li>
+                    <li>Learn how to use Jupyter Notebooks</li>
+                </ul>
+                <div class="setup-card">
+                    <h4>Running Python In the Terminal</h4>
+                    <p>This is the most basic way to run Python code - directly in your terminal.
+                        It isn't a <em>bad</em> way to start, but it's not the most efficient and will have you jumping between tools.
+                        We'll walk through here for the sake of completeness, but I recommend mostly forgetting about this after this section, until you find a reason to come back to it.
+                    </p>
+                    <ol>
+                        <li>Open your terminal (command prompt, powershell, or VSCode terminal)</li>
+                        <li>Make sure your virtual environment is activated (see previous section)</li>
+                        <li>Create a new Python file in your project folder - you can do this in VSCode or any text editor. Name it <code>hello.py</code></li>
+                        <li>Add the following code to the file (using VSCode or a text editor such as Notepad):
+                            <pre><code>print("Hello, World!")</code></pre>
+                        </li>
+                        <li>Save the file</li>
+                        <li>In the terminal, run the script by typing: <code>python hello.py</code></li>
+                        <li>You should see the output: <code>Hello, World!</code></li>
+                    </ol>
+                    <p>And there you have  it - running your first Python script in the terminal - you're a real hackerman!
+                         But now let's move on to more practical and efficient ways to run Python code.
+                    </p>
+                </div>
+
+                <div class="setup-card">
+                    <h4>Running Python in VSCode</h4>
+                    <p>VSCode makes it easy to write and run Python code with its built-in features and extensions.</p>
+                    <ol>
+                        <li>Open your project folder in VSCode</li>
+                        <li>Create a new Python file named <code>hello_vscode.py</code></li>
+                        <li>Add the same code as before, with a small modification:
+                            <pre><code>print("Hello, World from VSCode!")</code></pre>
+                        </li>
+                        <li>Save the file</li>
+                        <li>Right-click anywhere in the file or click the "Run" button and select "Run Python File in Terminal"</li>
+                        <li>You should see the output: <code>Hello, World from VSCode!</code> show up in the integrated terminal (probably the bottom of your screen)</li>
+                    </ol>
+                    <p>VSCode also offers features like IntelliSense (code completion), debugging, and version control integration, making it a powerful tool for Python development.
+                        It's not a dedicated Python IDE, but it's very effective and will let you work well with other file types as well.
+                    </p>
+                    <p>
+                        VSCode also has a lot of extensions for convenience - we've installed some alreayd, but go ahead and epxlore if any catch your attention or you think there should be a certain capability.
+                    </p>
+                </div>
+
+                <div class="setup-card"> 
+                    <h4>Running Python in Jupyter Notebooks</h4>
+                    <p>Jupyter Notebooks are an interactive way to write and run Python code, combining code, text, and visualizations in a single document.</p>
+                    <ol>
+                        <li>In your terminal (with the virtual environment activated), install Jupyter by running: <code>pip install jupyter</code> <em>(you only need to do this once per virtual environment)</em></li>
+                        <li>In VSCode, create a new file titled <code>hello_jupyter.ipynb</code></li>
+                        <li>Open the file in VSCode - it should open in the Jupyter Notebook interface</li>
+                        <li>In the first cell (should be code type by default), type:
+                            <pre><code>print("Hello, World from Jupyter!")</code></pre>
+                        </li>
+                        <li>Press Shift + Enter to run the cell</li>
+                        <li>You should see the output: <code>Hello, World from Jupyter!</code> below the cell</li>
+                    </ol>
+                    <p>Jupyter Notebooks are great for data analysis, visualization, and sharing your work with others.
+                        They allow you to document your code and results in a clear and organized manner via markdown cells interspersed within the code blocks.
+                    </p>
+                </div>
             </article>
 
+            
             <article id="basic_python" class="toc_item">
                 <h3>Basic Python</h3>
+                <h4>Objectives </h4>    
+                <ul>
+                    <li>Understand basic Python syntax and structure</li>
+                    <li>Learn about variables, data types, and control flow</li>
+                    <li>Get familiar with functions and modules</li>
+                </ul>   
+                
             </article>
             
             <article id="reading_data" class="toc_item">
