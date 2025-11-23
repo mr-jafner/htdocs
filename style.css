@@ -124,5 +124,169 @@ main {
 article.toc_item h3::before {
   counter-increment: section;
   content: counter(section) ". ";
-  
+
+}
+
+/* Slide-to-side TOC */
+.page-toc {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+
+.page-toc.sidebar-mode {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 220px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1em;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.page-toc.sidebar-mode ol {
+  font-size: 0.9em;
+  line-height: 1.8em;
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+/* Adjust main content when TOC is in sidebar */
+.content-shifted {
+  margin-left: 260px;
+  transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Collapsible sections with details/summary */
+details.collapsible-section {
+  margin: 2em 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+details.collapsible-section summary {
+  cursor: pointer;
+  padding: 1em 1.5em;
+  background-color: #f8f8f8;
+  font-family: sans-serif;
+  font-size: 1.3em;
+  font-weight: normal;
+  user-select: none;
+  transition: background-color 0.2s;
+  list-style: none;
+}
+
+details.collapsible-section summary::-webkit-details-marker {
+  display: none;
+}
+
+details.collapsible-section summary::before {
+  content: "▶ ";
+  display: inline-block;
+  transition: transform 0.3s;
+  margin-right: 0.5em;
+}
+
+details.collapsible-section[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details.collapsible-section summary:hover {
+  background-color: #eeeeee;
+}
+
+details.collapsible-section .section-content {
+  padding: 1.5em;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5em;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s, background-color 0.2s;
+  z-index: 1000;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover {
+  background-color: #0052a3;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .page-toc.sidebar-mode {
+    position: fixed;
+    top: auto;
+    bottom: 70px;
+    left: 20px;
+    right: 20px;
+    width: auto;
+    max-height: 50vh;
+    transform: translateY(100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .page-toc.sidebar-mode.mobile-visible {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .content-shifted {
+    margin-left: 0;
+  }
+
+  .mobile-toc-toggle {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 999;
+    display: none;
+  }
+
+  .mobile-toc-toggle.visible {
+    display: block;
+  }
 }

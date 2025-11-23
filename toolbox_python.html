@@ -15,18 +15,20 @@
             <nav id="nav-placeholder"></nav>
             
             <h2>Getting Started with Python</h2>
-            <ol start="0">
-                <li><a href="#why_python">Why Python for Mechanical Engineers?</a></li>
-                <li><a href="#setup">Setting Up Your System</a> </li>
-                <li><a href="#how_to_run_code">How to Run Code</a></li>
-                <li><a href="#basic_python">Basic Python</a></li>
-                <li><a href="#reading_data">Reading Data</a></li>
-                <li><a href="#plotting_data">Plotting Data</a></li>
-                <li><a href="#automating_tasks">Automating Tasks</a></li>
-                <li><a href="#engineering_math">Engineering Math in Python</a></li>
-                <li><a href="#hands_on_labs">Hands-On Labs</a></li>
-                <li><a href="#additional_resources">Additional Resources</a></li>
-            </ol>
+            <div class="page-toc" id="page-toc">
+                <ol start="0">
+                    <li><a href="#why_python">Why Python for Mechanical Engineers?</a></li>
+                    <li><a href="#setup">Setting Up Your System</a> </li>
+                    <li><a href="#how_to_run_code">How to Run Code</a></li>
+                    <li><a href="#basic_python">Basic Python</a></li>
+                    <li><a href="#reading_data">Reading Data</a></li>
+                    <li><a href="#plotting_data">Plotting Data</a></li>
+                    <li><a href="#automating_tasks">Automating Tasks</a></li>
+                    <li><a href="#engineering_math">Engineering Math in Python</a></li>
+                    <li><a href="#hands_on_labs">Hands-On Labs</a></li>
+                    <li><a href="#additional_resources">Additional Resources</a></li>
+                </ol>
+            </div>
 
             <article id="why_python" class="toc_item">
                 <h3>Why Python for Mechanical Engineers?</h3>
@@ -41,110 +43,212 @@
 
             </article>
 
-            <article id="setup" class="toc_item">
-                <h3>Setting Up Your System</h3>
-                <p>This setup works well for me, and should for you too - but there is no shortage of good alternatives to try out!</p>
-                <p><strong>Important Note:</strong> This is setup for Windows machines - process on Mac or Linux will be similar, but different</p>
-                <p><strong>Install Python</strong></p>
-                <ol>
-                    <li>Download <a href="https://www.python.org/downloads/">the latest version of Python for your system from the website</a></li>
-                    <li>Run the installer - make sure to check the box that says "Add Python to PATH" before clicking "Install Now"</li>
-                    <li> That's it - you have Python installed!</li>
-                </ol>
-
-                <p><strong>Install an IDE</strong></p>
-                <p>An IDE is an Integrated Development Environment - a tool that helps you write, manage, and run your code more easily.</p>
-                <p>You don't <em>have to</em> use and IDE, but it makes a lot of things easier and faster</p>
-                <ol>
-                    <li>Download <a href="https://code.visualstudio.com/" target="_blank">VSCode</a> and install it</li>
-                    <li>Open VSCode, go to the Extensions tab (left sidebar, square icon), search for "Python" and install the extension by Microsoft</li>
-                    <li>Also install the Jupyter extension by Microsoft</li>
-                    <li>Restart VSCode and you should be good to go - you can customize settings and additional extensions as you want</li>
-                </ol>
-
-                <p>Create your first Virtual Environment</p>
-                <p>This is another thing you don't <em>have to </em> do, but learn the habit now and it will keep projects organized for future you</p>
-                <p>This is a self contained environment for your project (a specific folder with its own Python installation and packages) - <strong>you will need to do this again for each project.</strong></p>
-                <ol>
-                    <li>Create a folder for your first project - do it in command prompt if you want, or just a new folder in Windows Explorer or VSCode</li>
-                    <li>Navigate to that folder in command prompt or powershell
-                        <ol>
-                            <li>In command prompt/powershell use "cd [filepath]" to get there</li>
-                            <li>In VSCode, open the folder and then open the integrated terminal and you'll be in the right spot - see it's a handy tool!</li>
-                        </ol>
-                    </li>
-                    <li>Create the virtual environment by running the command: <code>python -m venv .venv</code></li>
-                    <li>Activate the virtual environment:
-                        <ul>
-                            <li>In command prompt, run: <code>.venv\Scripts\activate.bat</code></li>
-                            <li>In powershell, run: <code>.venv\Scripts\Activate.ps1</code>
-                            <ol>
-                                <li><em>Note: </em>I have run into execution policy issues when trying to run this command in powershell. 
-                                    If you get an error, you can bypass it... but just switch to command prompt or use the VSCode terminal.</li>
-                            </ol>
-                            </li>
-                            <li>In VSCode terminal, it should auto activate when you open the terminal - if not use the powershell command</li>
-                        </ul>    
-                    </li>
-                    <li>You should see the terminal prompt change to show the virtual environment is active - something like: <code>(.venv) C:\Users\you\path\to\project&gt;</code></li>
-                    <li>While in here, let's install some packages via pip - these are essentially python toolboxes; run <code>pip install pandas numpy matplotlib plotly</code>
+            <details id="setup" class="collapsible-section toc_item" open>
+                <summary><h3>Setting Up Your System</h3></summary>
+                <div class="section-content">
+                    <p>This setup works well for me, and should for you too - but there is no shortage of good alternatives to try out!</p>
+                    <p><strong>Important Note:</strong> This is setup for Windows machines - process on Mac or Linux will be similar, but different</p>
+                    <p><strong>Install Python</strong></p>
                     <ol>
-                        <li>These are the packages we'll be using in this guide - pandas for data manipulation, numpy for numerical operations, matplotlib and plotly for plotting</li>
-                        <li>We will likely install more later, but this is a good start.</li>
+                        <li>Download <a href="https://www.python.org/downloads/">the latest version of Python for your system from the website</a></li>
+                        <li>Run the installer - make sure to check the box that says "Add Python to PATH" before clicking "Install Now"</li>
+                        <li> That's it - you have Python installed!</li>
                     </ol>
-                    </li>
-                    <li>To deactivate the virtual environment when you're done working, just run the command: <code>deactivate</code></li>   
-                    <li>Next time you come back, just re-run the activation script and the environment will how you left it.</li>
-                </ol>
 
-            </article>
+                    <p><strong>Install an IDE</strong></p>
+                    <p>An IDE is an Integrated Development Environment - a tool that helps you write, manage, and run your code more easily.</p>
+                    <p>You don't <em>have to</em> use and IDE, but it makes a lot of things easier and faster</p>
+                    <ol>
+                        <li>Download <a href="https://code.visualstudio.com/" target="_blank">VSCode</a> and install it</li>
+                        <li>Open VSCode, go to the Extensions tab (left sidebar, square icon), search for "Python" and install the extension by Microsoft</li>
+                        <li>Also install the Jupyter extension by Microsoft</li>
+                        <li>Restart VSCode and you should be good to go - you can customize settings and additional extensions as you want</li>
+                    </ol>
 
-             <article id="how_to_run_code" class="toc_item">
-                <h3>How to Run Code</h3>
-            </article>
+                    <p>Create your first Virtual Environment</p>
+                    <p>This is another thing you don't <em>have to </em> do, but learn the habit now and it will keep projects organized for future you</p>
+                    <p>This is a self contained environment for your project (a specific folder with its own Python installation and packages) - <strong>you will need to do this again for each project.</strong></p>
+                    <ol>
+                        <li>Create a folder for your first project - do it in command prompt if you want, or just a new folder in Windows Explorer or VSCode</li>
+                        <li>Navigate to that folder in command prompt or powershell
+                            <ol>
+                                <li>In command prompt/powershell use "cd [filepath]" to get there</li>
+                                <li>In VSCode, open the folder and then open the integrated terminal and you'll be in the right spot - see it's a handy tool!</li>
+                            </ol>
+                        </li>
+                        <li>Create the virtual environment by running the command: <code>python -m venv .venv</code></li>
+                        <li>Activate the virtual environment:
+                            <ul>
+                                <li>In command prompt, run: <code>.venv\Scripts\activate.bat</code></li>
+                                <li>In powershell, run: <code>.venv\Scripts\Activate.ps1</code>
+                                <ol>
+                                    <li><em>Note: </em>I have run into execution policy issues when trying to run this command in powershell.
+                                        If you get an error, you can bypass it... but just switch to command prompt or use the VSCode terminal.</li>
+                                </ol>
+                                </li>
+                                <li>In VSCode terminal, it should auto activate when you open the terminal - if not use the powershell command</li>
+                            </ul>
+                        </li>
+                        <li>You should see the terminal prompt change to show the virtual environment is active - something like: <code>(.venv) C:\Users\you\path\to\project&gt;</code></li>
+                        <li>While in here, let's install some packages via pip - these are essentially python toolboxes; run <code>pip install pandas numpy matplotlib plotly</code>
+                        <ol>
+                            <li>These are the packages we'll be using in this guide - pandas for data manipulation, numpy for numerical operations, matplotlib and plotly for plotting</li>
+                            <li>We will likely install more later, but this is a good start.</li>
+                        </ol>
+                        </li>
+                        <li>To deactivate the virtual environment when you're done working, just run the command: <code>deactivate</code></li>
+                        <li>Next time you come back, just re-run the activation script and the environment will how you left it.</li>
+                    </ol>
+                </div>
+            </details>
 
-            <article id="basic_python" class="toc_item">
-                <h3>Basic Python</h3>
-            </article>
-            
-            <article id="reading_data" class="toc_item">
-                <h3>Reading Data</h3>
-            </article>
+            <details id="how_to_run_code" class="collapsible-section toc_item" open>
+                <summary><h3>How to Run Code</h3></summary>
+                <div class="section-content">
+                    <p>Content coming soon...</p>
+                </div>
+            </details>
 
-            <article id="plotting_data" class="toc_item">
-                <h3>Plotting Data</h3>
-            </article>
+            <details id="basic_python" class="collapsible-section toc_item">
+                <summary><h3>Basic Python</h3></summary>
+                <div class="section-content">
+                    <p>Content coming soon...</p>
+                </div>
+            </details>
 
-            <article id="automating_tasks" class="toc_item">
-                <h3>Automating Tasks</h3>
-            </article>
-        
-            <article id="engineering_math" class="toc_item">
-                <h3>Engineering Math in Python</h3>
-            </article>
+            <details id="reading_data" class="collapsible-section toc_item">
+                <summary><h3>Reading Data</h3></summary>
+                <div class="section-content">
+                    <p>Content coming soon...</p>
+                </div>
+            </details>
 
-            <article id="hands_on_labs" class="toc_item">
-                <h3>Hands-On Labs</h3>
-            </article>
+            <details id="plotting_data" class="collapsible-section toc_item">
+                <summary><h3>Plotting Data</h3></summary>
+                <div class="section-content">
+                    <p>Content coming soon...</p>
+                </div>
+            </details>
 
-            <article id="additional_resources" class="toc_item">
-                <h3>Additional Resources</h3>
-            </article>
+            <details id="automating_tasks" class="collapsible-section toc_item">
+                <summary><h3>Automating Tasks</h3></summary>
+                <div class="section-content">
+                    <p>Content coming soon...</p>
+                </div>
+            </details>
+
+            <details id="engineering_math" class="collapsible-section toc_item">
+                <summary><h3>Engineering Math in Python</h3></summary>
+                <div class="section-content">
+                    <p>Content coming soon...</p>
+                </div>
+            </details>
+
+            <details id="hands_on_labs" class="collapsible-section toc_item">
+                <summary><h3>Hands-On Labs</h3></summary>
+                <div class="section-content">
+                    <p>Content coming soon...</p>
+                </div>
+            </details>
+
+            <details id="additional_resources" class="collapsible-section toc_item">
+                <summary><h3>Additional Resources</h3></summary>
+                <div class="section-content">
+                    <p>Content coming soon...</p>
+                </div>
+            </details>
         
         </main>
         
         <footer id="footer-placeholder"></footer>
+
+        <!-- Back to top button -->
+        <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
+        <!-- Mobile TOC toggle -->
+        <button class="mobile-toc-toggle" id="mobile-toc-toggle" aria-label="Toggle table of contents">≡</button>
 
         <script>
             // Load navigation
             fetch('common/nav.html')
                 .then(response => response.text())
                 .then(data => document.getElementById('nav-placeholder').innerHTML = data);
-            
+
             // Load footer
             fetch('common/footer.html')
                 .then(response => response.text())
                 .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+            // Slide-to-side TOC functionality
+            const toc = document.getElementById('page-toc');
+            const mainContent = document.querySelector('main');
+            const backToTopBtn = document.getElementById('back-to-top');
+            const mobileTocToggle = document.getElementById('mobile-toc-toggle');
+            const scrollThreshold = 400; // Pixels to scroll before TOC slides to side
+            const isMobile = () => window.innerWidth <= 768;
+
+            function handleScroll() {
+                const scrollPosition = window.scrollY;
+
+                // Handle TOC slide to side
+                if (scrollPosition > scrollThreshold && !isMobile()) {
+                    toc.classList.add('sidebar-mode');
+                    mainContent.classList.add('content-shifted');
+                } else if (!isMobile()) {
+                    toc.classList.remove('sidebar-mode');
+                    mainContent.classList.remove('content-shifted');
+                }
+
+                // Handle back to top button
+                if (scrollPosition > 300) {
+                    backToTopBtn.classList.add('visible');
+                    if (isMobile()) {
+                        mobileTocToggle.classList.add('visible');
+                    }
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                    mobileTocToggle.classList.remove('visible');
+                }
+            }
+
+            // Back to top button click
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Mobile TOC toggle
+            mobileTocToggle.addEventListener('click', () => {
+                toc.classList.toggle('mobile-visible');
+            });
+
+            // Close mobile TOC when clicking a link
+            if (isMobile()) {
+                toc.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        toc.classList.remove('mobile-visible');
+                    });
+                });
+            }
+
+            // Attach scroll listener
+            window.addEventListener('scroll', handleScroll);
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (isMobile()) {
+                    toc.classList.remove('sidebar-mode');
+                    mainContent.classList.remove('content-shifted');
+                } else {
+                    toc.classList.remove('mobile-visible');
+                    mobileTocToggle.classList.remove('visible');
+                }
+            });
+
+            // Initial check
+            handleScroll();
         </script>
     </body>
 </html>
