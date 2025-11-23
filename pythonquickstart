@@ -36,23 +36,33 @@
                 <p>It's similar to Matlab, but Python is free and open source.</p>
                 <p>It can overlap with Excel, but Python can handle large datasets and complex calculations with ease - no waiting for a plot to load or hitting the row limits in a spreadsheet.</p>
                 <p>Also, due to how it installs, at least in my experience, it is not typically blocked by corporate IT limitations - you're not sneaking, it's just not a problem</p>
-                <p><strong>Important Note:</strong> This is an introduction to help you get things done, with the methods I've found best for me - this is not exhaustive nor will it qualify you as a software engineer. 
-                If you work through this page you've merely passed your driver's test - you are not even close to being a professional racer. </p>
-
+                <div class="tip-box">
+                    <div class="callout-title">Setting Expectations</div>
+                    <p>This is an introduction to help you get things done, with the methods I've found best for me - this is not exhaustive nor will it qualify you as a software engineer. 
+                    If you work through this page you've merely passed your driver's test - you are not even close to being a professional racer. </p>
+                </div>
             </article>
 
             <article id="setup" class="toc_item">
                 <h3>Setting Up Your System</h3>
                 <p>This setup works well for me, and should for you too - but there is no shortage of good alternatives to try out!</p>
-                <p><strong>Important Note:</strong> This is setup for Windows machines - process on Mac or Linux will be similar, but different</p>
-                <p><strong>Install Python</strong></p>
+
+                <div class="note-box">
+                    <div class="callout-title">Important Note</div>
+                    <p>This is setup for Windows machines - process on Mac or Linux will be similar, but different</p>
+                </div>
+
+                <div class="setup-card">
+                <h4>Install Python</h4>
                 <ol>
                     <li>Download <a href="https://www.python.org/downloads/">the latest version of Python for your system from the website</a></li>
                     <li>Run the installer - make sure to check the box that says "Add Python to PATH" before clicking "Install Now"</li>
                     <li> That's it - you have Python installed!</li>
                 </ol>
+                </div>
 
-                <p><strong>Install an IDE</strong></p>
+                <div class="setup-card">
+                <h4>Install an IDE</h4>
                 <p>An IDE is an Integrated Development Environment - a tool that helps you write, manage, and run your code more easily.</p>
                 <p>You don't <em>have to</em> use and IDE, but it makes a lot of things easier and faster</p>
                 <ol>
@@ -61,10 +71,15 @@
                     <li>Also install the Jupyter extension by Microsoft</li>
                     <li>Restart VSCode and you should be good to go - you can customize settings and additional extensions as you want</li>
                 </ol>
+                </div>
 
-                <p>Create your first Virtual Environment</p>
-                <p>This is another thing you don't <em>have to </em> do, but learn the habit now and it will keep projects organized for future you</p>
-                <p>This is a self contained environment for your project (a specific folder with its own Python installation and packages) - <strong>you will need to do this again for each project.</strong></p>
+                <div class="setup-card">
+                <h4>Create your first Virtual Environment</h4>
+                <p>This is another thing you don't <em>have to </em> do, but wlearn the habit now and it will keep projects organized for future you</p>
+                <div class="note-box">
+                    <div class="callout-title">Note on Virtual Environments</div>
+                    <p>This is a self contained environment for your project (a specific folder with its own Python installation and packages) - <strong>you will need to do this again for each project.</strong></p>
+                </div>
                 <ol>
                     <li>Create a folder for your first project - do it in command prompt if you want, or just a new folder in Windows Explorer or VSCode</li>
                     <li>Navigate to that folder in command prompt or powershell
@@ -77,12 +92,12 @@
                     <li>Activate the virtual environment:
                         <ul>
                             <li>In command prompt, run: <code>.venv\Scripts\activate.bat</code></li>
-                            <li>In powershell, run: <code>.venv\Scripts\Activate.ps1</code>
-                            <ol>
-                                <li><em>Note: </em>I have run into execution policy issues when trying to run this command in powershell. 
-                                    If you get an error, you can bypass it... but just switch to command prompt or use the VSCode terminal.</li>
-                            </ol>
-                            </li>
+                            <li>In powershell, run: <code>.venv\Scripts\Activate.ps1</code></li>
+                            <details>
+                                <summary>Execution Policy Errors</summary>
+                                <p>I have run into execution policy issues when trying to run this command in powershell. 
+                                    If you get an error, you can bypass it... but just switch to command prompt or use the VSCode terminal.</p>
+                            </details>
                             <li>In VSCode terminal, it should auto activate when you open the terminal - if not use the powershell command</li>
                         </ul>    
                     </li>
@@ -96,7 +111,7 @@
                     <li>To deactivate the virtual environment when you're done working, just run the command: <code>deactivate</code></li>   
                     <li>Next time you come back, just re-run the activation script and the environment will how you left it.</li>
                 </ol>
-
+                </div>
             </article>
 
              <article id="how_to_run_code" class="toc_item">
