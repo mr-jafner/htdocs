@@ -193,11 +193,53 @@
                     <li>Learn about variables, data types, and control flow</li>
                     <li>Get familiar with functions and modules</li>
                 </ul>   
-                
+                <div class="tip-box"> 
+                    <div class="callout-title">Limitations of this Section</div>
+                    <p>This may be the most underdeveloped section of this page - 
+                        my goal is to give you just enough information to get things done.</p>
+                </div>
+
+                <p>Python is known for its simple and readable syntax, making it easy to learn and use. 
+                    Here are some basic concepts to get you started:</p>
+                <ul>
+                    <li><strong>White Space:</strong> Python uses indentation (I use 4 spaces)to define blocks of code. Proper indentation is crucial for the code to run correctly.    
+                        <pre><code>def function_with_proper_whitespace():
+    print("Hello, World!")</code></pre> 
+                        <pre><code>def function_with_wrong_whitespace():
+print("This will cause an IndentationError")</code></pre>
+                    </li>
+                    <li><strong>Variables:</strong> Used to store data values. Python has dynamic typing, so you don't need to declare variable types explicitly.
+                        <pre><code>x = 10</code></pre>
+                    </li>
+                    <li><strong>Data Types:</strong> Common data types include integers, floats, strings, lists, tuples, and dictionaries.
+                        <pre><code>my_list = [1, 2, 3]</code></pre>
+                    </li>
+                    <li><strong>Control Flow:</strong> Includes conditional statements (if, elif, else) and loops (for, while).
+                        <pre><code>if x &gt; 5:
+    print("x is greater than 5")</code></pre>
+                    </li>       
+                    <li><strong>Functions:</strong> Blocks of reusable code defined using the def keyword.
+                        <pre><code>def greet(name):
+    print(f"Hello, {name}!")</code></pre>
+                    </li>
+                    <li><strong>Modules:</strong> Files containing Python code that can be imported and used in other Python files.
+                        <pre><code>import math
+print(math.sqrt(16))  # Outputs: 4.0</code></pre>
+                    </li>
+                    <li><strong>Comments:</strong> Use the # symbol for single-line comments and triple quotes (''' or """) for multi-line comments.
+                        <pre><code># This is a single-line comment
+"""This is a 
+multi-line comment"""</code></pre>
+                    </li>   
+                </ul>       
+
+                <p>And there you have it - a very incomplete introduction to Python. As you work through the examples and labs, you'll become more familiar with Python's capabilities and syntax.</p>
+
             </article>
             
             <article id="reading_data" class="toc_item">
                 <h3>Reading Data</h3>
+                
             </article>
 
             <article id="plotting_data" class="toc_item">
