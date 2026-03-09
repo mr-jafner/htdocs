@@ -21,6 +21,11 @@
                 <h2>Gift Ideas for Jeff</h2>
                 <p>Here are some ideas of things I might want</p>
                
+                    <article class="gift-item">
+                        <h3 class="gift-title">Classic Give'r Gloves - Size: Large, Waxed: Yes</h3>
+                        <p class="gift-description">I really like the heavier Give'r gloves and mittens I have - these would be nice for warmer weather (and I wouldn't say no to having them embossed)</p>
+                        <p><a href="https://www.give-r.com/products/classic-giver-gloves" class="gift-link" target="_blank">Give'r's Site</a></p>
+                    </article>
                     
                     <article class="gift-item">
                         <h3 class="gift-title">Darn Tough socks - Size: Medium</h3>
