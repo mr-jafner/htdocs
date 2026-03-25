@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pane — Institutional Knowledge, Ambient in Your Browser</title>
+  <meta name="description" content="A browser extension that surfaces your team's institutional knowledge automatically as you browse. No wikis to maintain. No search to master.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f1114;
+      --paper: #f6f4f0;
+      --mid: #b8b3aa;
+      --faint: #e8e4de;
+      --accent: #c8622a;
+      --accent-soft: #c8622a18;
+      --glass: rgba(15, 17, 20, 0.04);
+      --glass-border: rgba(15, 17, 20, 0.08);
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'Instrument Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      font-size: 17px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── Grain overlay ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── Layout ─── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    /* ─── Navigation ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(246, 244, 240, 0.8);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-status {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      padding-top: 10rem;
+      padding-bottom: 5rem;
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+      max-width: 620px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-body {
+      font-size: 1.12rem;
+      line-height: 1.7;
+      color: #4a4640;
+      max-width: 540px;
+    }
+
+    /* ─── Divider ─── */
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--mid);
+      margin: 0 auto;
+    }
+
+    /* ─── Problem ─── */
+    .problem {
+      border-top: 1px solid var(--faint);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+    }
+
+    .problem-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3vw, 1.65rem);
+      line-height: 1.5;
+      font-weight: 400;
+      color: #2a2722;
+    }
+
+    .problem-text + .problem-text {
+      margin-top: 1.5rem;
+    }
+
+    /* ─── How it works ─── */
+    .how-it-works {
+      border-top: 1px solid var(--faint);
+    }
+
+    .steps {
+      display: grid;
+      gap: 1px;
+      background: var(--faint);
+      border: 1px solid var(--faint);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .step {
+      background: var(--paper);
+      padding: 2rem 2.2rem;
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+
+    .step h3 {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .step p {
+      color: #5a5650;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* ─── Matching ─── */
+    .matching {
+      border-top: 1px solid var(--faint);
+    }
+
+    .matching-intro {
+      font-size: 1.05rem;
+      color: #4a4640;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .layers {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .layer {
+      padding: 1.5rem 1.8rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 6px;
+      position: relative;
+    }
+
+    .layer::before {
+      content: attr(data-layer);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .layer h4 {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .layer p {
+      color: #5a5650;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* ─── What Pane is not ─── */
+    .not-section {
+      border-top: 1px solid var(--faint);
+    }
+
+    .nots {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .not-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0 1rem;
+      align-items: baseline;
+    }
+
+    .not-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .not-desc {
+      color: #5a5650;
+      font-size: 0.9rem;
+    }
+
+    /* ─── Sidebar mockup ─── */
+    .sidebar-demo {
+      border-top: 1px solid var(--faint);
+    }
+
+    .mockup-frame {
+      background: #1a1c20;
+      border-radius: 10px;
+      padding: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .mockup-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mockup-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .mockup-url {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+      margin-left: auto;
+    }
+
+    .mockup-layout {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 1rem;
+      min-height: 300px;
+    }
+
+    .mockup-page {
+      background: rgba(255,255,255,0.03);
+      border-radius: 6px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .mockup-line {
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 3px;
+    }
+
+    .mockup-line.short { width: 60%; }
+    .mockup-line.medium { width: 80%; }
+    .mockup-line.heading { height: 10px; width: 45%; background: rgba(255,255,255,0.1); margin-bottom: 0.3rem; }
+    .mockup-line.spacer { height: 12px; background: transparent; }
+
+    .mockup-sidebar {
+      background: rgba(255,255,255,0.04);
+      border-radius: 6px;
+      border-left: 2px solid var(--accent);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .mockup-sidebar-title {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 0.2rem;
+    }
+
+    .mockup-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 5px;
+      padding: 0.7rem 0.8rem;
+    }
+
+    .mockup-card-title {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.25rem;
+    }
+
+    .mockup-card-meta {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: rgba(255,255,255,0.2);
+      margin-bottom: 0.3rem;
+    }
+
+    .mockup-card-note {
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.45;
+    }
+
+    .mockup-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.04em;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      margin-top: 0.3rem;
+    }
+
+    .mockup-badge.endorsed {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(200, 98, 42, 0.2);
+    }
+
+    .mockup-badge.team {
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mockup-card.highlight {
+      border-color: rgba(200, 98, 42, 0.2);
+      background: rgba(200, 98, 42, 0.04);
+    }
+
+    /* ─── Pricing ─── */
+    .pricing {
+      border-top: 1px solid var(--faint);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1px;
+      background: var(--faint);
+      border: 1px solid var(--faint);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .price-tier {
+      background: var(--paper);
+      padding: 1.8rem 1.5rem;
+    }
+
+    .price-tier.featured {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .tier-name {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.6rem;
+    }
+
+    .price-tier.featured .tier-name {
+      color: rgba(246, 244, 240, 0.4);
+    }
+
+    .tier-price {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .tier-desc {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: #5a5650;
+    }
+
+    .price-tier.featured .tier-desc {
+      color: rgba(246, 244, 240, 0.55);
+    }
+
+    /* ─── Adoption ─── */
+    .adoption {
+      border-top: 1px solid var(--faint);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--faint);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 8px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--mid);
+      border: 2px solid var(--paper);
+      z-index: 1;
+    }
+
+    .timeline-item:first-child::before {
+      background: var(--accent);
+    }
+
+    .timeline-when {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-item h4 {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-item p {
+      color: #5a5650;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid var(--faint);
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--mid);
+      font-style: italic;
+    }
+
+    /* ─── Animations ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label { animation: fadeUp 0.6s ease both; }
+    .hero h1 { animation: fadeUp 0.6s ease 0.1s both; }
+    .hero-body { animation: fadeUp 0.6s ease 0.2s both; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 640px) {
+      html { font-size: 16px; }
+
+      .container { padding: 0 1.4rem; }
+
+      section { padding: 3.5rem 0; }
+
+      .hero { padding-top: 7rem; padding-bottom: 3rem; }
+
+      .step {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+
+      .step-num {
+        font-size: 1.2rem;
+      }
+
+      .not-item {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+      }
+
+      .mockup-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .mockup-page { display: none; }
+
+      .mockup-sidebar {
+        border-left: none;
+        border-top: 2px solid var(--accent);
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .loop-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="/pane" class="logo">Pane</a>
+    <span class="nav-status">In development</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-label">Browser extension for teams</span>
+      <h1>Your team's knowledge exists. It's just <em>invisible</em> when someone needs it.</h1>
+      <p class="hero-body">
+        Pane is a browser extension that lets teams build a shared knowledge graph of resources, terms, people, and context — then surfaces it automatically as anyone on the team browses and works.
+      </p>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="problem">
+    <div class="container">
+      <p class="section-label">The problem</p>
+      <p class="problem-text">
+        Every engineering org has two knowledge systems: the official one — SharePoint, Confluence, shared drives — and the real one, which lives in the heads of people who've been around long enough to know where things are.
+      </p>
+      <p class="problem-text">
+        New hires spend months learning where to find things. Experienced engineers burn hours answering "where's the spec for X?" in Slack. Someone finds a critical document after 40 minutes of searching, uses it, closes the tab, and that discovery evaporates. The next person starts from scratch.
+      </p>
+      <p class="problem-text">
+        Wikis go stale. Intranets become graveyards. Shared bookmarks lack context. The knowledge exists — it's just never where you need it, when you need it.
+      </p>
+    </div>
+  </section>
+
+  <!-- Sidebar demo -->
+  <section class="sidebar-demo">
+    <div class="container">
+      <p class="section-label">What it looks like</p>
+      <div class="mockup-frame">
+        <div class="mockup-bar">
+          <span class="mockup-dot"></span>
+          <span class="mockup-dot"></span>
+          <span class="mockup-dot"></span>
+          <span class="mockup-url">supplier-x.com/products/turbo-A</span>
+        </div>
+        <div class="mockup-layout">
+          <div class="mockup-page">
+            <div class="mockup-line heading"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line medium"></div>
+            <div class="mockup-line short"></div>
+            <div class="mockup-line spacer"></div>
+            <div class="mockup-line heading" style="width:35%"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line medium"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line short"></div>
+            <div class="mockup-line spacer"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line medium"></div>
+          </div>
+          <div class="mockup-sidebar">
+            <div class="mockup-sidebar-title">Pane · 3 cards</div>
+            <div class="mockup-card highlight">
+              <div class="mockup-card-title">Rev C Thermal Spec</div>
+              <div class="mockup-card-meta">domain match · supplier-x.com</div>
+              <div class="mockup-card-note">Use Rev 3, not the one on the landing page. Updated thermal limits as of Q2.</div>
+              <span class="mockup-badge endorsed">✓ Endorsed</span>
+            </div>
+            <div class="mockup-card">
+              <div class="mockup-card-title">Maria Chen — Supplier Contact</div>
+              <div class="mockup-card-meta">domain match</div>
+              <div class="mockup-card-note">Primary contact for qualification issues. Prefers email over phone.</div>
+              <span class="mockup-badge team">Supplier Quality</span>
+            </div>
+            <div class="mockup-card">
+              <div class="mockup-card-title">Journal Bearing Wear Guide</div>
+              <div class="mockup-card-meta">term match · "journal bearing"</div>
+              <div class="mockup-card-note">Includes updated failure-mode table from 2024 field data.</div>
+              <span class="mockup-badge team">Project Atlas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Useful alone -->
+  <section class="individual" style="border-top: 1px solid var(--faint);">
+    <div class="container">
+      <p class="section-label">Useful before you have a team</p>
+      <p class="problem-text" style="font-size: clamp(1.15rem, 2.5vw, 1.35rem);">
+        Every time you visit that supplier portal, you spend five minutes hunting for the same spec. Every time you open that internal tool, you forget which tab has the right report. You've solved this problem before — you just didn't save the solution anywhere it would find you again.
+      </p>
+      <p style="margin-top: 1.5rem; font-size: 1rem; color: #4a4640; line-height: 1.7; max-width: 540px;">
+        Pane starts as a personal tool. Flag a resource once, and it resurfaces automatically the next time you're in the same context. It's contextual bookmarking — your knowledge, indexed by where you need it, not filed in a folder you'll forget to check. And when you're ready, everything you've flagged for yourself can be shared to a team with one click.
+      </p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how-it-works">
+    <div class="container">
+      <p class="section-label">How it works</p>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div>
+            <h3>A team lead seeds the graph</h3>
+            <p>Spend 30–60 minutes adding your team's key resources, glossary terms, and contacts. Map them to the URLs, domains, and topics where they're relevant. Twenty to thirty well-chosen items is enough to start.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div>
+            <h3>The extension surfaces knowledge as you browse</h3>
+            <p>When a teammate opens a supplier portal, Pane shows the relevant specs. When they hit an unfamiliar acronym, Pane defines it and links to the governing document. No searching — it just appears.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div>
+            <h3>The graph grows through use</h3>
+            <p>Find something useful? Flag it in 15 seconds — add a note, tag it, assign it to your team. That knowledge is now available to every future teammate who lands in the same context. Leads endorse the best flags. The graph stays alive without anyone maintaining a wiki.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flags + Needs -->
+  <section class="closed-loop" style="border-top: 1px solid var(--faint);">
+    <div class="container">
+      <p class="section-label">The closed loop</p>
+      <p class="matching-intro" style="margin-bottom: 2rem;">
+        Most knowledge tools only capture what people already know. Pane captures what's missing, too.
+      </p>
+      <div class="loop-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 8px; overflow: hidden;">
+        <div style="background: var(--paper); padding: 1.8rem 2rem;">
+          <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;">Flag</p>
+          <p style="font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 0.5rem;">What exists</p>
+          <p style="color: #5a5650; font-size: 0.88rem; line-height: 1.6;">"I found something useful here — save it for the team."</p>
+        </div>
+        <div style="background: var(--paper); padding: 1.8rem 2rem;">
+          <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;">Need</p>
+          <p style="font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 0.5rem;">What's missing</p>
+          <p style="color: #5a5650; font-size: 0.88rem; line-height: 1.6;">"I wish I had something here — I expected context and found none."</p>
+        </div>
+      </div>
+      <p style="margin-top: 2rem; font-size: 0.95rem; color: #4a4640; line-height: 1.7;">
+        When Pane has nothing to show on a page, you can mark that moment as a <strong>Need</strong> — one click, no form, no interruption to what you're doing. That Need gets logged with the URL and domain, and shows up on your team lead's dashboard as a gap in coverage. When someone later creates a Flag that covers that context, the Need resolves automatically. Over time, the pattern of Needs becomes a content backlog: the team can see exactly which domains and pages have the most unmet demand, and fill them in order of impact.
+      </p>
+      <p style="margin-top: 1rem; font-size: 0.88rem; color: #5a5650; line-height: 1.6; padding: 1rem 1.4rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 6px;">
+        This turns Pane from a system that surfaces what your team already knows into one that <strong>learns from what's missing and improves over time</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Matching -->
+  <section class="matching">
+    <div class="container">
+      <p class="section-label">The matching engine</p>
+      <p class="matching-intro">
+        Pane determines what to surface through layered relevance. Matching runs entirely on your machine against a cached copy of the knowledge graph — page content never leaves your browser.
+      </p>
+      <div class="layers">
+        <div class="layer" data-layer="Layer 1">
+          <h4>URL &amp; Domain</h4>
+          <p>Exact URL, wildcard patterns, and domain-level matching. Highest confidence — you're on the exact page or site where someone flagged a resource.</p>
+        </div>
+        <div class="layer" data-layer="Layer 2">
+          <h4>Glossary Terms</h4>
+          <p>Page content is scanned for your team's defined vocabulary — acronyms, project names, product names, aliases. Dictionary lookups against a curated term list, so noise stays low.</p>
+        </div>
+        <div class="layer" data-layer="Layer 3">
+          <h4>Resource Keywords</h4>
+          <p>Individual resources carry topic keywords. A vibration spec tagged with "NVH," "resonance," and "modal testing" surfaces on any page discussing those topics — across unrelated sites. Requires two or more keyword hits to trigger.</p>
+        </div>
+        <div class="layer" data-layer="Layer 4">
+          <h4>Social &amp; Freshness Signals</h4>
+          <p>Active team members' flags rank higher. Recently accessed resources float up. Multi-person flags get boosted. Endorsed content surfaces first. Stale flags fade without anyone pruning them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Pane is not -->
+  <section class="not-section">
+    <div class="container">
+      <p class="section-label">What Pane is not</p>
+      <div class="nots">
+        <div class="not-item">
+          <span class="not-label">Not a wiki.</span>
+          <span class="not-desc">Pane doesn't host content. It points to things that live elsewhere and adds context about when they're relevant.</span>
+        </div>
+        <div class="not-item">
+          <span class="not-label">Not a search aggregator.</span>
+          <span class="not-desc">It doesn't index your SaaS tools. It surfaces a curated, team-built knowledge graph at the right moment.</span>
+        </div>
+        <div class="not-item">
+          <span class="not-label">Not a second browser.</span>
+          <span class="not-desc">It lives inside the browser you already use, as a collapsible sidebar.</span>
+        </div>
+        <div class="not-item">
+          <span class="not-label">Not an AI chatbot.</span>
+          <span class="not-desc">LLM features may enhance matching later, but they're not the interface or the pitch.</span>
+        </div>
+        <div class="not-item">
+          <span class="not-label">Not a password manager.</span>
+          <span class="not-desc">Pane surfaces knowledge and context, not credentials. It doesn't store secrets or sensitive auth data.</span>
+        </div>
+        <div class="not-item">
+          <span class="not-label">Not another thing to maintain.</span>
+          <span class="not-desc">The graph grows through normal work. Freshness signals handle decay automatically.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Adoption timeline -->
+  <section class="adoption">
+    <div class="container">
+      <p class="section-label">How adoption works</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <p class="timeline-when">Day 1</p>
+          <h4>Personal use</h4>
+          <p>Install the extension, get a personal vault. Pane is immediately useful as a contextual bookmarking tool — flag resources, add notes, resurface them later in context.</p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-when">Days 1–3</p>
+          <h4>Seed the graph</h4>
+          <p>Create a shared team. Add your group's core resources, terms, and contacts. Doesn't need to be exhaustive — start with what people ask about most.</p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-when">Week 1</p>
+          <h4>Team onboarding</h4>
+          <p>Invite teammates. They install the extension and immediately get ambient context from the seeded graph. The first time a new engineer opens a supplier portal and Pane shows the right spec with a note saying "use Rev 3, not the one on the landing page," the product sells itself.</p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-when">Ongoing</p>
+          <h4>Organic growth</h4>
+          <p>Team members flag resources as they find them. Leads endorse the best ones. Comments add nuance. The graph gets richer without anyone scheduling time to maintain it.</p>
+        </div>
+        <div class="timeline-item">
+          <p class="timeline-when">Month 2+</p>
+          <h4>Cross-team knowledge</h4>
+          <p>Users on multiple teams see merged context. A resource flagged by both the project team and the supplier quality team shows up with both teams' notes. Knowledge flows across org boundaries without formal process.</p>
+        </div>
+      </div>
+      <p style="margin-top: 2.5rem; font-size: 0.88rem; color: #5a5650; padding: 1rem 1.4rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 6px;">
+        <strong>No IT required to start.</strong> A team lead and 2–3 teammates can be running without admin consent, procurement, or integrations. The extension reads the current page, stores the knowledge graph in Pane's hosted backend, and that's it.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing">
+    <div class="container">
+      <p class="section-label">Pricing</p>
+      <p style="font-family: var(--font-display); font-size: 1.3rem; color: #2a2722; margin-bottom: 0.6rem;">Free for personal use. Team tiers to come.</p>
+      <p style="font-size: 0.92rem; color: #5a5650; line-height: 1.65; max-width: 480px;">
+        Pane will always have a free personal vault. Shared team features, cross-team visibility, and enterprise options will be priced when the product is ready.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-name">Pane</p>
+      <p class="footer-tagline">A layer you look through, not a destination you go to.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
