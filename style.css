@@ -1,268 +1,369 @@
-body {
-  max-width: 40em;
-  margin: 0 auto;
-  padding: 5px;
-  font-family: Georgia, serif;
-  font-size: 18px;
-  line-height: 1.6em;
-  color: black;
-}
-h1, h2, h3 {
-  font-family: sans-serif;
-  font-weight: normal;
-}
+/* =====================================================================
+ * jafner.com — core site styles
+ * ---------------------------------------------------------------------
+ * Tokens, base typography, shell (nav + footer), shared primitives.
+ * Page-specific styles live inline in <style> blocks on each page.
+ * ===================================================================== */
 
-h2 {
-  margin-top: 1.5em;
-  margin-bottom: 0.75em;
-  font-size: 1.8em;
-}
 
-a {
-  color: #0066cc;
-  text-decoration: none;
+/* ---------- Self-hosted fonts -----------------------------------------
+ * Place the variable woff2 files in /assets/fonts/.
+ * Sources:
+ *   Fraunces:   https://github.com/undercase/fraunces
+ *   Geist:      https://github.com/vercel/geist-font
+ * Use the variable woff2 files (not static cuts) — the about page
+ * relies on Fraunces' SOFT, WONK, and opsz axes for the italic accents.
+ * --------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
-
-a:hover {
-  text-decoration: underline;
-}
-
-a:visited {
-  color: #551a8b;
-}
-
-.medium_img{
-  width:70%;
-}
-
-/* Content sections */
-.content-section {
-  margin-bottom: 2em;
-}
-
-/* Items container */
-.items-container {
-  margin: 1.5em 0;
-}
-
-/* Article items (books, products, podcasts) */
-.book-item,
-.product-item,
-.podcast-item,
-.gift-item {
-  margin-bottom: 1em;
-  padding-bottom: 1.25em;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.book-item:last-child,
-.product-item:last-child,
-.podcast-item:last-child {
-  border-bottom: none;
-}
-
-/* Titles */
-.book-title,
-.product-title,
-.podcast-title,
-.gift-title {
-  font-family: sans-serif;
-  font-weight: normal;
-  margin: 0 0 0.5em 0;
-  font-size: 1.2em;
-}
-
-/* Author styling */
-.book-author {
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
   font-style: italic;
-  color: #555;
-  margin: 0 0 0.75em 0;
-  font-size: 0.95em;
+  font-display: swap;
 }
-
-/* Description text */
-.book-description,
-.product-description,
-.podcast-description,
-.gift-description,
-.book-bonus {
-  margin: 0.5em 0;
-  line-height: 1.6em;
+@font-face {
+  font-family: 'Geist';
+  src: url('/assets/fonts/Geist[wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
-
-/* Links section */
-.book-links {
-  margin-top: 0.75em;
-}
-
-.book-link {
-  display: inline-block;
-  margin-right: 1em;
-}
-
-/* Category group sections */
-.category-group {
-  margin-top: 2.5em;
-  margin-bottom: 2em;
-}
-
-.category-group h3 {
-  font-size: 1.3em;
-  margin-bottom: 1em;
-  padding-bottom: 0.3em;
-  border-bottom: 1px solid #333;
-}
-
-.category-group:first-of-type {
-  margin-top: 1em;
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/assets/fonts/GeistMono[wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 
+/* ---------- Tokens ----------------------------------------------------
+ * One source of truth for color and spacing.
+ * Edit here and every page picks it up.
+ * --------------------------------------------------------------------- */
+:root {
+  /* Color */
+  --bg:         #F2F0EA;
+  --bg-soft:    #EAE6DC;
+  --bg-deep:    #E0DBCC;
+  --ink:        #0F2847;
+  --ink-soft:   #3A4D6B;
+  --ink-muted:  #80836A;
+  --rule:       #D0CCBE;
+  --rule-soft:  #DDD9CC;
+  --accent:     #1E5AA8;
+  --accent-soft:#6B92C7;
+  --moss:       #3A5848;
+  --gold:       #B88A2A;
 
-/* Code Styling */
-code {
-  background-color: #f4f4f4;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.9em;
-  color: #c7254e;
-}
-
-pre {
-  background-color: #f4f4f4;
-  padding: 1em;
-  border-radius: 5px;
-  border-left: 4px solid #0066cc;
-  overflow-x: auto;
-}
-
-pre code {
-  background-color: transparent;
-  padding: 0;
-  color: inherit;
-}
-
-/* Note box styling */
-.note-box, .warning-box, .tip-box {
-  padding: 0.5em;
-  margin: 0.5em 0;
-  border-radius: 5px;
-  border-left: 4px solid;
-}
-
-.note-box {
-  background-color: #e7f3ff;
-  border-left-color: #0066cc;
-}
-
-.warning-box {
-  background-color: #fff3cd;
-  border-left-color: #ffc107;
-}
-
-.tip-box {
-  background-color: #d4edda;
-  border-left-color: #28a745;
-}
-
-.callout-title {
-  font-weight: bold;
-  margin-bottom: 0.25em;
-}
-
-/* Lists Styling */
-main {
-  counter-reset: section -1;
-}
-
-article.toc_item h3::before {
-  counter-increment: section;
-  content: counter(section) ". ";
-  
-}
-
-.toc_item ol, .toc_item ul {
-  margin: 1em 0;
-  line-height: 1.8em;
-}
-
-.toc_item li {
-  margin-bottom: 0.5em;
-}
-
-.toc_item ol ol, .toc_item ul ul {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-}
-
-.setup-card {
-  background-color: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 1.5em;
-  margin: 1.5em 0;
-}
-
-.setup-card h4 {
-  margin-top: 0;
-  font-family: sans-serif;
-  color: #0066cc;
-  border-bottom: 2px solid #0066cc;
-  padding-bottom: 0.5em;
+  /* Spacing scale (use these instead of magic numbers) */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 128px;
 }
 
 
-/* Step Number Styling */
-.step-list {
-  counter-reset: step-counter;
-  list-style: none;
-  padding-left: 0;
+/* ---------- Reset and base -------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-.step-list li {
-  counter-increment: step-counter;
-  margin-bottom: 1.5em;
-  padding-left: 3em;
+/* Subtle ambient color wash — adds depth without being noisy */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 15% 8%,  rgba(30, 90, 168, 0.05) 0%, transparent 35%),
+    radial-gradient(circle at 85% 75%, rgba(58, 88, 72, 0.04) 0%, transparent 40%);
+}
+
+a { color: inherit; }
+
+
+/* ---------- Layout container ----------------------------------------- */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 32px;
   position: relative;
+  z-index: 1;
 }
 
-.step-list li::before {
-  content: counter(step-counter);
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-color: #0066cc;
-  color: white;
-  width: 2em;
-  height: 2em;
-  border-radius: 50%;
+section { padding: 88px 0; position: relative; }
+
+
+/* ---------- Top nav (shared across all pages) ------------------------ */
+.topnav {
+  padding: 28px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.topnav .mark a {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s;
+}
+.topnav .mark a:hover { color: var(--accent); }
+.topnav .dot {
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(30, 90, 168, 0.12);
+}
+.topnav .links {
+  display: flex;
+  gap: 28px;
+}
+.topnav .links a {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.topnav .links a:hover,
+.topnav .links a[aria-current="page"] {
+  color: var(--accent);
 }
 
-/* Collapsible Sections */
-details {
-  margin: 1em 0;
-  padding: 0.5em;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+
+/* ---------- Section header (reusable pattern) ------------------------ */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 52px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--rule);
+}
+.section-header .num {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+.section-header h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 450;
+  font-variation-settings: 'opsz' 96, 'SOFT' 50;
+  font-size: clamp(30px, 4vw, 42px);
+  letter-spacing: -0.022em;
+  color: var(--ink);
+}
+.section-header h2 em {
+  font-style: italic;
+  color: var(--accent);
+  font-variation-settings: 'opsz' 96, 'SOFT' 100, 'WONK' 1;
 }
 
-summary {
-  cursor: pointer;
-  font-weight: bold;
-  padding: 0.5em;
-  background-color: #f8f8f8;
-  border-radius: 3px;
+
+/* ---------- Pill (reusable tag) -------------------------------------- */
+.pill {
+  display: inline-block;
+  padding: 4px 11px;
+  margin: 3px 4px 3px 0;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  font-size: 13.5px;
+  color: var(--ink);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.pill:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
 }
 
-summary:hover {
-  background-color: #e8e8e8;
+
+/* ---------- Live pulse indicator (reusable) -------------------------- */
+.live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+.live .pulse {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--moss);
+  position: relative;
+}
+.live .pulse::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--moss);
+  animation: pulseRing 2s ease-out infinite;
+}
+@keyframes pulseRing {
+  0%   { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2);   opacity: 0; }
 }
 
-details[open] summary {
-  margin-bottom: 1em;
+
+/* ---------- Footer (shared shell) ------------------------------------ */
+.footer {
+  padding: 88px 0 56px;
+  border-top: 1px solid var(--rule);
+  margin-top: 56px;
+  position: relative;
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.footer h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 96, 'SOFT' 50, 'WONK' 1;
+  font-size: clamp(40px, 5.5vw, 64px);
+  line-height: 1.0;
+  letter-spacing: -0.028em;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.footer h3 em {
+  font-style: italic;
+  color: var(--accent);
+  font-variation-settings: 'opsz' 96, 'SOFT' 100, 'WONK' 1;
+}
+.footer .footer-text {
+  font-family: 'Fraunces', serif;
+  font-weight: 380;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 480px;
+}
+.footer .links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.footer .links a {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.2s, padding 0.2s;
+}
+.footer .links a:hover {
+  color: var(--accent);
+  padding-left: 8px;
+}
+.footer .links a .arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+.footer .links a:hover .arrow { transform: translateX(5px); }
+
+.colophon {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px dashed var(--rule);
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 600px) {
+  .colophon { flex-direction: column; gap: 8px; }
+}
+
+
+/* ---------- Animations (reusable) ------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: revealUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+@keyframes revealUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.25s; }
+.delay-3 { animation-delay: 0.4s; }
+.delay-4 { animation-delay: 0.55s; }
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ---------- Accessibility -------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

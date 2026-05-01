@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jeff Hafner &mdash; A pitch for Birdstop</title>
+<meta name="description" content="An offer of automotive systems-engineering rigor as Birdstop scales Fealty toward Part 108." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+   * Tokens — match jafner.com warm-neutral palette
+   * ============================================================ */
+  :root {
+    --bg:         #F2F0EA;
+    --bg-soft:    #EAE6DC;
+    --bg-deep:    #E0DBCC;
+    --ink:        #0F2847;
+    --ink-soft:   #3A4D6B;
+    --ink-muted:  #80836A;
+    --rule:       #D0CCBE;
+    --rule-soft:  #DDD9CC;
+    --accent:     #1E5AA8;
+    --accent-soft:#6B92C7;
+    --moss:       #3A5848;
+    --gold:       #B88A2A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Geist', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      radial-gradient(circle at 15% 8%,  rgba(30, 90, 168, 0.05) 0%, transparent 35%),
+      radial-gradient(circle at 85% 75%, rgba(58, 88, 72, 0.04) 0%, transparent 40%);
+  }
+
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  section { padding: 80px 0; position: relative; }
+
+
+  /* ---------- Top nav ---------- */
+  .topnav {
+    padding: 28px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .topnav .mark a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .topnav .dot {
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(30, 90, 168, 0.12);
+  }
+  .topnav .doc-meta {
+    color: var(--ink-muted);
+    font-size: 11.5px;
+  }
+
+
+  /* ============================================================
+   * HERO
+   * ============================================================ */
+  .hero {
+    padding: 88px 0 64px;
+    position: relative;
+  }
+
+  .hero .eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero .eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero .eyebrow .sep {
+    color: var(--ink-muted);
+    margin: 0 4px;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+    font-size: clamp(52px, 8.5vw, 110px);
+    line-height: 0.95;
+    letter-spacing: -0.028em;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+    color: var(--accent);
+  }
+
+  .hero .lede {
+    font-family: 'Fraunces', serif;
+    font-weight: 380;
+    font-size: clamp(19px, 2.2vw, 24px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 640px;
+    letter-spacing: -0.005em;
+    margin-bottom: 22px;
+  }
+  .hero .lede em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero .sig {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero .sig::before {
+    content: '';
+    width: 18px;
+    height: 1px;
+    background: var(--ink-muted);
+  }
+
+  .hero-bridge {
+    position: absolute;
+    top: 80px;
+    right: -30px;
+    width: 360px;
+    height: 280px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  @media (max-width: 980px) {
+    .hero-bridge { display: none; }
+  }
+
+
+  /* ============================================================
+   * SECTION HEADER (shared)
+   * ============================================================ */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 48px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-header .num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+  }
+  .section-header h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 450;
+    font-variation-settings: 'opsz' 96, 'SOFT' 50;
+    font-size: clamp(28px, 3.6vw, 40px);
+    letter-spacing: -0.022em;
+    color: var(--ink);
+  }
+  .section-header h2 em {
+    font-style: italic;
+    color: var(--accent);
+    font-variation-settings: 'opsz' 96, 'SOFT' 100, 'WONK' 1;
+  }
+
+
+  /* ============================================================
+   * SECTION 01 — Why you, specifically
+   * ============================================================ */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  @media (max-width: 880px) { .why-grid { grid-template-columns: 1fr; } }
+
+  .why {
+    background: var(--bg);
+    padding: 32px 28px;
+    transition: background 0.35s;
+  }
+  .why:hover { background: var(--bg-soft); }
+  .why .num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-variation-settings: 'opsz' 96, 'SOFT' 100, 'WONK' 1;
+    font-size: 36px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .why h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 450;
+    font-variation-settings: 'opsz' 36, 'SOFT' 50;
+    font-size: 19px;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.012em;
+  }
+  .why p {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+
+  /* ============================================================
+   * SECTION 02 — The transition you're in
+   * ============================================================ */
+  .transition-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  @media (max-width: 720px) { .transition-block { grid-template-columns: 1fr; } }
+
+  .transition {
+    background: var(--bg);
+    padding: 30px 28px;
+  }
+  .transition .arrow-line {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .transition .arrow-line .from { color: var(--ink-muted); }
+  .transition .arrow-line .arrow { color: var(--accent); font-weight: 600; }
+  .transition .arrow-line .to { color: var(--accent); }
+  .transition p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+
+  /* ============================================================
+   * SECTION 03 — The bridge (mapping table)
+   * ============================================================ */
+  .bridge-intro {
+    font-family: 'Fraunces', serif;
+    font-weight: 380;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 720px;
+    margin-bottom: 36px;
+  }
+
+  .mapping {
+    border: 1px solid var(--rule);
+    background: var(--bg);
+  }
+
+  .mapping-row {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.35s;
+  }
+  .mapping-row:last-child { border-bottom: none; }
+  .mapping-row:hover { background: var(--bg-soft); }
+
+  @media (max-width: 720px) {
+    .mapping-row {
+      grid-template-columns: 1fr;
+      padding: 8px 0;
+    }
+  }
+
+  .mapping-cell {
+    padding: 22px 26px;
+  }
+  .mapping-cell.from {
+    border-right: 1px dashed var(--rule);
+  }
+  .mapping-cell.from .label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .mapping-cell.from .practice {
+    font-family: 'Fraunces', serif;
+    font-weight: 450;
+    font-variation-settings: 'opsz' 36, 'SOFT' 50;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .mapping-cell.to {
+    background: rgba(30, 90, 168, 0.04);
+  }
+  .mapping-cell.to .label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .mapping-cell.to .practice {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .mapping-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    border-right: 1px dashed var(--rule);
+  }
+  @media (max-width: 720px) {
+    .mapping-arrow {
+      display: none;
+    }
+    .mapping-cell.from {
+      border-right: none;
+      padding-bottom: 6px;
+    }
+    .mapping-cell.from::after {
+      content: '↓';
+      display: block;
+      color: var(--accent);
+      margin-top: 12px;
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+
+  .bridge-footnote {
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: var(--bg-soft);
+    border-left: 3px solid var(--accent);
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .bridge-footnote strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+
+  /* ============================================================
+   * SECTION 04 — Where I'd start (workstreams)
+   * ============================================================ */
+  .workstreams {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  @media (max-width: 760px) { .workstreams { grid-template-columns: 1fr; } }
+
+  .workstream {
+    background: var(--bg);
+    padding: 32px 28px;
+    transition: background 0.35s;
+    position: relative;
+  }
+  .workstream:hover { background: var(--bg-soft); }
+
+  .workstream .ws-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .workstream .ws-num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .workstream .phase {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: var(--bg-deep);
+    color: var(--ink-soft);
+    border: 1px solid var(--rule);
+  }
+  .workstream h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 450;
+    font-variation-settings: 'opsz' 36, 'SOFT' 50;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .workstream h4 em {
+    font-style: italic;
+    color: var(--accent);
+    font-variation-settings: 'opsz' 36, 'SOFT' 100, 'WONK' 1;
+  }
+  .workstream p {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+
+  /* ============================================================
+   * SECTION 05 — Demonstration projects
+   * ============================================================ */
+  .demo-intro {
+    font-family: 'Fraunces', serif;
+    font-weight: 380;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 720px;
+    margin-bottom: 36px;
+  }
+
+  .demo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 880px) { .demo-grid { grid-template-columns: 1fr; } }
+
+  .demo {
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s, box-shadow 0.35s;
+  }
+  .demo:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px -20px rgba(15, 40, 71, 0.2);
+  }
+
+  .demo-signature {
+    height: 130px;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .demo-signature svg { width: 100%; height: 100%; }
+
+  .demo-body { padding: 24px 26px 28px; flex: 1; }
+
+  .demo .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .demo .index {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+  }
+  .demo .status {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 4px 9px;
+    border-radius: 2px;
+    background: rgba(184, 138, 42, 0.08);
+    color: var(--gold);
+    border: 1px solid rgba(184, 138, 42, 0.3);
+  }
+  .demo h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-variation-settings: 'opsz' 60, 'SOFT' 50, 'WONK' 1;
+    font-size: 24px;
+    letter-spacing: -0.018em;
+    margin-bottom: 8px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .demo .builds-on {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13.5px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .demo p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .demo p:last-child { margin-bottom: 0; }
+  .demo p strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .demo-footnote {
+    margin-top: 32px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 720px;
+  }
+
+
+  /* ============================================================
+   * SECTION 06 — Background, briefly
+   * ============================================================ */
+  .background {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  @media (max-width: 800px) {
+    .background { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  .background p {
+    font-family: 'Fraunces', serif;
+    font-weight: 380;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    margin-bottom: 18px;
+  }
+  .background p:last-child { margin-bottom: 0; }
+  .background p .accent { color: var(--accent); font-style: italic; }
+
+  .background .credentials {
+    border: 1px solid var(--rule);
+    background: var(--bg-soft);
+    padding: 24px;
+  }
+  .background .credentials h5 {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .background .credentials ul {
+    list-style: none;
+  }
+  .background .credentials li {
+    font-size: 14px;
+    color: var(--ink);
+    padding: 9px 0;
+    border-bottom: 1px dashed var(--rule);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .background .credentials li:last-child { border-bottom: none; padding-bottom: 0; }
+  .background .credentials li .key {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    min-width: 64px;
+  }
+  .background .credentials li a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .background .credentials li a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+
+  /* ============================================================
+   * CLOSING
+   * ============================================================ */
+  .closing {
+    padding: 96px 0 56px;
+    border-top: 1px solid var(--rule);
+    margin-top: 40px;
+  }
+  .closing-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  @media (max-width: 760px) {
+    .closing-inner { grid-template-columns: 1fr; gap: 36px; }
+  }
+
+  .closing h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-variation-settings: 'opsz' 96, 'SOFT' 50, 'WONK' 1;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 22px;
+  }
+  .closing h3 em {
+    font-style: italic;
+    color: var(--accent);
+    font-variation-settings: 'opsz' 96, 'SOFT' 100, 'WONK' 1;
+  }
+  .closing p {
+    font-family: 'Fraunces', serif;
+    font-weight: 380;
+    font-size: 17.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 14px;
+  }
+  .closing p:last-child { margin-bottom: 0; }
+
+  .closing .links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .closing .links a {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s, padding 0.2s;
+  }
+  .closing .links a:hover {
+    color: var(--accent);
+    padding-left: 8px;
+  }
+  .closing .links a .arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+  .closing .links a:hover .arrow { transform: translateX(5px); }
+
+  .colophon {
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px dashed var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  @media (max-width: 600px) {
+    .colophon { flex-direction: column; gap: 8px; }
+  }
+
+
+  /* ============================================================
+   * Animations
+   * ============================================================ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+  @keyframes revealUp { to { opacity: 1; transform: translateY(0); } }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* a11y */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <div class="mark">
+      <a href="https://jafner.com" aria-label="Jeff Hafner home">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Jeff Hafner</span>
+      </a>
+    </div>
+    <div class="doc-meta">A pitch / Birdstop / 2026</div>
+  </nav>
+
+
+  <!-- ============================== HERO ============================ -->
+  <header class="hero">
+    <svg class="hero-bridge" viewBox="0 0 360 280" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Left cluster: automotive -->
+      <g>
+        <circle cx="50"  cy="60"  r="6" fill="#1E5AA8"/>
+        <circle cx="50"  cy="140" r="8" fill="#1E5AA8"/>
+        <circle cx="50"  cy="220" r="6" fill="#1E5AA8"/>
+        <line x1="50" y1="60"  x2="50" y2="140" stroke="#1E5AA8" stroke-width="0.8" opacity="0.5"/>
+        <line x1="50" y1="140" x2="50" y2="220" stroke="#1E5AA8" stroke-width="0.8" opacity="0.5"/>
+        <text x="50" y="42" font-family="Geist Mono, monospace" font-size="9" fill="#1E5AA8" text-anchor="middle" letter-spacing="0.5">DFMEA</text>
+        <text x="50" y="158" font-family="Geist Mono, monospace" font-size="9" fill="#1E5AA8" text-anchor="middle" letter-spacing="0.5">APQP</text>
+        <text x="50" y="240" font-family="Geist Mono, monospace" font-size="9" fill="#1E5AA8" text-anchor="middle" letter-spacing="0.5">PPAP</text>
+      </g>
+      <!-- Right cluster: drone/BVLOS -->
+      <g>
+        <circle cx="310" cy="60"  r="6" fill="#1E5AA8"/>
+        <circle cx="310" cy="140" r="8" fill="#1E5AA8"/>
+        <circle cx="310" cy="220" r="6" fill="#1E5AA8"/>
+        <line x1="310" y1="60"  x2="310" y2="140" stroke="#1E5AA8" stroke-width="0.8" opacity="0.5"/>
+        <line x1="310" y1="140" x2="310" y2="220" stroke="#1E5AA8" stroke-width="0.8" opacity="0.5"/>
+        <text x="310" y="42" font-family="Geist Mono, monospace" font-size="9" fill="#1E5AA8" text-anchor="middle" letter-spacing="0.5">SAFETY CASE</text>
+        <text x="310" y="158" font-family="Geist Mono, monospace" font-size="9" fill="#1E5AA8" text-anchor="middle" letter-spacing="0.5">PART 108</text>
+        <text x="310" y="240" font-family="Geist Mono, monospace" font-size="9" fill="#1E5AA8" text-anchor="middle" letter-spacing="0.5">NDAA SUPPLY</text>
+      </g>
+      <!-- Bridges -->
+      <g stroke="#1E5AA8" stroke-width="1" fill="none">
+        <path d="M50 60 Q180 40 310 60"   opacity="0.6"/>
+        <path d="M50 140 Q180 120 310 140" opacity="0.7"/>
+        <path d="M50 220 Q180 240 310 220" opacity="0.6"/>
+      </g>
+      <!-- Mid waypoints -->
+      <g fill="#1E5AA8" opacity="0.5">
+        <circle cx="180" cy="48" r="3"/>
+        <circle cx="180" cy="128" r="3"/>
+        <circle cx="180" cy="232" r="3"/>
+      </g>
+      <!-- Footing -->
+      <line x1="20" y1="260" x2="100" y2="260" stroke="#1E5AA8" stroke-width="1.2" opacity="0.5"/>
+      <line x1="260" y1="260" x2="340" y2="260" stroke="#1E5AA8" stroke-width="1.2" opacity="0.5"/>
+    </svg>
+
+    <div class="eyebrow reveal delay-1">
+      <span>Cold inquiry</span>
+      <span class="sep">·</span>
+      <span>From a Detroit-area engineer</span>
+    </div>
+    <h1 class="reveal delay-2">An offer to <em>Birdstop</em>.</h1>
+    <p class="lede reveal delay-3">
+      You've publicly committed to bringing automotive-grade engineering rigor to
+      autonomous drone production. I've spent fifteen years inside that rigor.
+      <em>Here's how I think I can help</em> &mdash; and what I'm willing to build to prove it.
+    </p>
+    <div class="sig reveal delay-4">
+      <span>Jeff Hafner</span>
+      <span style="opacity: 0.6;">&middot;</span>
+      <span>April 2026</span>
+    </div>
+  </header>
+
+
+  <!-- ============================== SECTION 01 ====================== -->
+  <section id="why">
+    <div class="section-header scroll-reveal">
+      <span class="num">01 / 06</span>
+      <h2>Why <em>you,</em> specifically</h2>
+    </div>
+
+    <div class="why-grid">
+      <div class="why scroll-reveal">
+        <div class="num">01</div>
+        <h4>The regulatory floor is shifting under the industry</h4>
+        <p>
+          Fealty arrives as the FAA moves from waiver-by-waiver BVLOS to a
+          standards-based Part 108 framework. The disciplines Part 108 leans on
+          &mdash; consensus airworthiness, performance-based safety cases,
+          recordkeeping, SMS &mdash; are functionally cousins of the AIAG-VDA
+          / AS9145 / DFMEA stack I run in my day job.
+        </p>
+      </div>
+
+      <div class="why scroll-reveal">
+        <div class="num">02</div>
+        <h4>You've tied the manufacturing thesis to Detroit's auto supply chain</h4>
+        <p>
+          That's not a brand line for me &mdash; it's the ecosystem I've spent
+          fifteen years inside. I know what Tier-1 PPAP looks like. I know what
+          supplier quality drift looks like at month nine of a launch. I know
+          how to hold a control plan together when nobody wants to look at it.
+        </p>
+      </div>
+
+      <div class="why scroll-reveal">
+        <div class="num">03</div>
+        <h4>You're at the headcount where everyone still does everything</h4>
+        <p>
+          Which is great until it isn't. The transition from "we know what's
+          in each other's heads" to "we have systems that survive someone
+          leaving" is hard, and most engineering managers I respect have
+          done it at least once. I have.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================== SECTION 02 ====================== -->
+  <section id="transition">
+    <div class="section-header scroll-reveal">
+      <span class="num">02 / 06</span>
+      <h2>The transition you're <em>in</em></h2>
+    </div>
+
+    <div class="transition-block">
+      <div class="transition scroll-reveal">
+        <div class="arrow-line">
+          <span class="from">Waivers</span>
+          <span class="arrow">&rarr;</span>
+          <span class="to">Part 108</span>
+        </div>
+        <p>
+          From per-CONOPS storytelling to a defensible, reproducible safety
+          case package that travels with the product.
+        </p>
+      </div>
+
+      <div class="transition scroll-reveal">
+        <div class="arrow-line">
+          <span class="from">Prototype</span>
+          <span class="arrow">&rarr;</span>
+          <span class="to">Manufactured product</span>
+        </div>
+        <p>
+          From a small team that can build a Fealty unit by memory to a
+          documented configuration that survives volume.
+        </p>
+      </div>
+
+      <div class="transition scroll-reveal">
+        <div class="arrow-line">
+          <span class="from">Field ops as a service</span>
+          <span class="arrow">&rarr;</span>
+          <span class="to">Application engineering</span>
+        </div>
+        <p>
+          From custom site work for every customer to repeatable kits and
+          deployment templates that scale faster than headcount.
+        </p>
+      </div>
+
+      <div class="transition scroll-reveal">
+        <div class="arrow-line">
+          <span class="from">Inheriting decisions</span>
+          <span class="arrow">&rarr;</span>
+          <span class="to">Architecting them</span>
+        </div>
+        <p>
+          The trade-offs you make in the next twelve months will live in the
+          product for years. They deserve more than weekly intuition.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================== SECTION 03 ====================== -->
+  <section id="bridge">
+    <div class="section-header scroll-reveal">
+      <span class="num">03 / 06</span>
+      <h2>The <em>bridge</em></h2>
+    </div>
+
+    <p class="bridge-intro scroll-reveal">
+      I'm not pitching aerospace experience. I'm pitching automotive
+      systems-engineering rigor and translating it. Here's the mapping I
+      think is true.
+    </p>
+
+    <div class="mapping scroll-reveal">
+
+      <div class="mapping-row">
+        <div class="mapping-cell from">
+          <span class="label">What I bring</span>
+          <div class="practice">DFMEA + FTA, AIAG-VDA seven-step methodology</div>
+        </div>
+        <div class="mapping-arrow" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12 H19 M14 7 L19 12 L14 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mapping-cell to">
+          <span class="label">What it becomes here</span>
+          <div class="practice">Part 108- and SORA-aligned hazard analysis and system safety case</div>
+        </div>
+      </div>
+
+      <div class="mapping-row">
+        <div class="mapping-cell from">
+          <span class="label">What I bring</span>
+          <div class="practice">APQP gate reviews, control plans, PPAP discipline</div>
+        </div>
+        <div class="mapping-arrow" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12 H19 M14 7 L19 12 L14 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mapping-cell to">
+          <span class="label">What it becomes here</span>
+          <div class="practice">Production launch discipline for the Drone, Perch, and Command builds &mdash; AS9145-style without the bureaucracy</div>
+        </div>
+      </div>
+
+      <div class="mapping-row">
+        <div class="mapping-cell from">
+          <span class="label">What I bring</span>
+          <div class="practice">Requirements engineering, SysML v2, traceable specifications</div>
+        </div>
+        <div class="mapping-arrow" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12 H19 M14 7 L19 12 L14 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mapping-cell to">
+          <span class="label">What it becomes here</span>
+          <div class="practice">A single source of truth for the Fealty system &mdash; traceable from customer ConOps to Part 108 airworthiness acceptance</div>
+        </div>
+      </div>
+
+      <div class="mapping-row">
+        <div class="mapping-cell from">
+          <span class="label">What I bring</span>
+          <div class="practice">Application engineering for Tier-1 automotive customers</div>
+        </div>
+        <div class="mapping-arrow" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12 H19 M14 7 L19 12 L14 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mapping-cell to">
+          <span class="label">What it becomes here</span>
+          <div class="practice">Customer ConOps to site-specific deployment specs &mdash; for DFR, telecom, megaproject, and government accounts</div>
+        </div>
+      </div>
+
+      <div class="mapping-row">
+        <div class="mapping-cell from">
+          <span class="label">What I bring</span>
+          <div class="practice">Cross-functional program management across mechanical, electrical, embedded</div>
+        </div>
+        <div class="mapping-arrow" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12 H19 M14 7 L19 12 L14 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mapping-cell to">
+          <span class="label">What it becomes here</span>
+          <div class="practice">Coordinated release management across the Fealty stack &mdash; aircraft, perch, sensors, cloud</div>
+        </div>
+      </div>
+
+      <div class="mapping-row">
+        <div class="mapping-cell from">
+          <span class="label">What I bring</span>
+          <div class="practice">Supplier quality, control plans, MSA</div>
+        </div>
+        <div class="mapping-arrow" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12 H19 M14 7 L19 12 L14 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mapping-cell to">
+          <span class="label">What it becomes here</span>
+          <div class="practice">NDAA-compliant supply chain validation &mdash; with the Detroit Tier-1 / Tier-2 base you're already pointed at</div>
+        </div>
+      </div>
+
+      <div class="mapping-row">
+        <div class="mapping-cell from">
+          <span class="label">What I bring</span>
+          <div class="practice">Coach-style management of small, technically diverse teams</div>
+        </div>
+        <div class="mapping-arrow" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12 H19 M14 7 L19 12 L14 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mapping-cell to">
+          <span class="label">What it becomes here</span>
+          <div class="practice">Helping a 20-person engineering team scale to fifty without losing what makes it good</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bridge-footnote scroll-reveal">
+      <strong>A note on translation.</strong>
+      The AIAG-VDA seven-step DFMEA is structurally similar to the system
+      safety processes used in aerospace &mdash; the kind Part 108's
+      consensus-standard airworthiness acceptance will draw from. The
+      vocabulary changes. The discipline doesn't.
+    </div>
+  </section>
+
+
+  <!-- ============================== SECTION 04 ====================== -->
+  <section id="start">
+    <div class="section-header scroll-reveal">
+      <span class="num">04 / 06</span>
+      <h2>Where I'd <em>start</em></h2>
+    </div>
+
+    <div class="workstreams">
+      <div class="workstream scroll-reveal">
+        <div class="ws-header">
+          <span class="ws-num">Workstream 01</span>
+          <span class="phase">First ~90 days</span>
+        </div>
+        <h4>Systems requirements <em>baseline</em></h4>
+        <p>
+          A single source of truth for Fealty system requirements, mapped to
+          Part 108 airworthiness acceptance and traceable from customer ConOps
+          down to component-level specs. Tool-agnostic; happy to use whatever's
+          already in flight or extend Synapse if it earns its place.
+        </p>
+      </div>
+
+      <div class="workstream scroll-reveal">
+        <div class="ws-header">
+          <span class="ws-num">Workstream 02</span>
+          <span class="phase">90 &mdash; 180 days</span>
+        </div>
+        <h4>Part 108 safety case <em>scaffolding</em></h4>
+        <p>
+          DFMEA at the system level for Drone, Perch, and Command. Hazard
+          analysis aligned to SORA-style operational safety objectives. A
+          risk matrix that gives you a defensible answer to "why did we make
+          this trade?" twelve months from now.
+        </p>
+      </div>
+
+      <div class="workstream scroll-reveal">
+        <div class="ws-header">
+          <span class="ws-num">Workstream 03</span>
+          <span class="phase">In parallel</span>
+        </div>
+        <h4>The application engineering <em>function</em></h4>
+        <p>
+          A repeatable handoff: Sales &rarr; Application Engineering &rarr;
+          Engineering &rarr; Field Ops. Site survey templates, configuration
+          kits, customer-specific waiver and OpSpec annexes. Most of the value
+          here is preventing re-engineering each customer from scratch.
+        </p>
+      </div>
+
+      <div class="workstream scroll-reveal">
+        <div class="ws-header">
+          <span class="ws-num">Workstream 04</span>
+          <span class="phase">In parallel</span>
+        </div>
+        <h4>Supply chain quality &amp; <em>Tier-1 onboarding</em></h4>
+        <p>
+          PPAP applied to drone subassemblies. NDAA compliance verification
+          process. APQP-style gate reviews integrated with engineering
+          releases &mdash; practical, not bureaucratic. Detroit Tier-1 and
+          Tier-2 audits where the supply story actually lives.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================== SECTION 05 ====================== -->
+  <section id="demo">
+    <div class="section-header scroll-reveal">
+      <span class="num">05 / 06</span>
+      <h2>What I'm willing to build <em>before we talk</em></h2>
+    </div>
+
+    <p class="demo-intro scroll-reveal">
+      Three demonstration projects, each scoped to a few weekends, each built
+      on tools I already use. Real outputs I can share, not slideware.
+    </p>
+
+    <div class="demo-grid">
+
+      <!-- Demo 01: Synapse model -->
+      <div class="demo scroll-reveal">
+        <div class="demo-signature">
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g stroke="#1E5AA8" stroke-width="0.9" opacity="0.7">
+              <line x1="60" y1="35"  x2="120" y2="65"/>
+              <line x1="180" y1="35" x2="120" y2="65"/>
+              <line x1="120" y1="65" x2="60" y2="100"/>
+              <line x1="120" y1="65" x2="180" y2="100"/>
+              <line x1="60" y1="100" x2="120" y2="105"/>
+              <line x1="180" y1="100" x2="120" y2="105"/>
+              <line x1="60" y1="35"  x2="60" y2="100"/>
+              <line x1="180" y1="35" x2="180" y2="100"/>
+            </g>
+            <g fill="#1E5AA8">
+              <circle cx="60"  cy="35"  r="4"/>
+              <circle cx="180" cy="35"  r="4"/>
+              <circle cx="120" cy="65"  r="6"/>
+              <circle cx="60"  cy="100" r="3.5"/>
+              <circle cx="180" cy="100" r="3.5"/>
+              <circle cx="120" cy="105" r="3.5"/>
+            </g>
+            <text x="120" y="20" font-family="Geist Mono, monospace" font-size="8" fill="#1E5AA8" text-anchor="middle" letter-spacing="0.5">FEALTY SYSTEM</text>
+          </svg>
+        </div>
+        <div class="demo-body">
+          <div class="meta">
+            <span class="index">D-01</span>
+            <span class="status">Proposed</span>
+          </div>
+          <h4>Fealty system architecture in Synapse</h4>
+          <span class="builds-on">builds on: jafner.com/synapse</span>
+          <p>
+            Synapse is a graph engine I built for SysML v2, DFMEA, and
+            requirements analysis. I'd model Fealty's public architecture
+            &mdash; Drone, Perch, Command &mdash; with subsystem decomposition,
+            ports, the optical/acoustic/ADS-B fusion chain, and a starter
+            requirements tree.
+          </p>
+          <p><strong>Output:</strong> a shareable model I can walk you through.</p>
+        </div>
+      </div>
+
+      <!-- Demo 02: DFMEA -->
+      <div class="demo scroll-reveal">
+        <div class="demo-signature">
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g stroke="#1E5AA8" stroke-width="0.8" fill="none" opacity="0.55">
+              <line x1="40" y1="30"  x2="200" y2="30"/>
+              <line x1="40" y1="55"  x2="200" y2="55"/>
+              <line x1="40" y1="80"  x2="200" y2="80"/>
+              <line x1="40" y1="105" x2="200" y2="105"/>
+              <line x1="40" y1="30"  x2="40" y2="105"/>
+              <line x1="80" y1="30"  x2="80" y2="105"/>
+              <line x1="120" y1="30" x2="120" y2="105"/>
+              <line x1="160" y1="30" x2="160" y2="105"/>
+              <line x1="200" y1="30" x2="200" y2="105"/>
+            </g>
+            <g fill="#1E5AA8">
+              <rect x="42" y="32" width="36" height="21" opacity="0.15"/>
+              <rect x="82" y="32" width="36" height="21" opacity="0.30"/>
+              <rect x="122" y="57" width="36" height="21" opacity="0.55"/>
+              <rect x="162" y="57" width="36" height="21" opacity="0.75"/>
+              <rect x="82" y="82" width="36" height="21" opacity="0.30"/>
+              <rect x="42" y="82" width="36" height="21" opacity="0.15"/>
+            </g>
+            <text x="120" y="125" font-family="Geist Mono, monospace" font-size="8" fill="#1E5AA8" text-anchor="middle" letter-spacing="0.5">SEVERITY × OCCURRENCE</text>
+          </svg>
+        </div>
+        <div class="demo-body">
+          <div class="meta">
+            <span class="index">D-02</span>
+            <span class="status">Proposed</span>
+          </div>
+          <h4>BVLOS DFMEA, public Fealty information</h4>
+          <span class="builds-on">framework: AIAG-VDA + SORA</span>
+          <p>
+            A worked AIAG-VDA seven-step DFMEA applied at the Fealty system
+            level &mdash; failure modes, effects, severity, occurrence, detection
+            &mdash; mapped to SORA-style operational safety objectives and Part 108
+            framing. Public information only.
+          </p>
+          <p><strong>Output:</strong> a structured DFMEA in the format your eventual safety case file will recognize.</p>
+        </div>
+      </div>
+
+      <!-- Demo 03: Application kit -->
+      <div class="demo scroll-reveal">
+        <div class="demo-signature">
+          <svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g stroke="#1E5AA8" stroke-width="1.4" fill="none" opacity="0.8" stroke-linecap="round">
+              <path d="M20 35 L80 35 Q92 35 95 45 L95 60 Q95 70 107 70 L220 70"/>
+              <path d="M20 70 L50 70 Q60 70 63 80 L63 95 Q63 105 75 105 L220 105"/>
+              <path d="M95 45 L95 25 Q95 15 107 15 L220 15" opacity="0.5"/>
+            </g>
+            <g fill="#1E5AA8">
+              <circle cx="20"  cy="35"  r="3.5"/>
+              <circle cx="20"  cy="70"  r="3.5"/>
+              <circle cx="95"  cy="45"  r="3"/>
+              <circle cx="63"  cy="80"  r="3"/>
+              <circle cx="220" cy="15"  r="3" opacity="0.6"/>
+              <circle cx="220" cy="70"  r="4"/>
+              <circle cx="220" cy="105" r="4"/>
+            </g>
+            <text x="120" y="125" font-family="Geist Mono, monospace" font-size="8" fill="#1E5AA8" text-anchor="middle" letter-spacing="0.5">CONOPS → DEPLOYMENT</text>
+          </svg>
+        </div>
+        <div class="demo-body">
+          <div class="meta">
+            <span class="index">D-03</span>
+            <span class="status">Proposed</span>
+          </div>
+          <h4>Application engineering kit, mid-size PD DFR</h4>
+          <span class="builds-on">builds on: SwimLanes timeline tool</span>
+          <p>
+            An end-to-end template for translating a hypothetical customer
+            ConOps (mid-size police department, urban DFR, 1&ndash;2 perches)
+            into deployment-ready specs &mdash; site survey checklist, system
+            configuration spec, training plan, deployment timeline.
+          </p>
+          <p><strong>Output:</strong> a filled template plus the empty version you can hand to your next AE hire.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="demo-footnote scroll-reveal">
+      I'd rather build these on my own time and have them be wrong in
+      specific, useful ways than pitch in the abstract. Happy to scope
+      differently if there are areas you'd rather see prioritized.
+    </p>
+  </section>
+
+
+  <!-- ============================== SECTION 06 ====================== -->
+  <section id="background">
+    <div class="section-header scroll-reveal">
+      <span class="num">06 / 06</span>
+      <h2>Background, <em>briefly</em></h2>
+    </div>
+
+    <div class="background">
+      <div class="scroll-reveal">
+        <p>
+          Fifteen years in automotive engineering. Currently engineering
+          manager at a turbocharger and fuel cell compressor company in the
+          Detroit metro area, leading a small, technically diverse team
+          across <span class="accent">mechanical, electrical, and embedded
+          software.</span> Earlier work on gasoline direct injection at DENSO.
+        </p>
+        <p>
+          Talent assessments say my strongest threads are conflict resolution,
+          embracing differences, and communication &mdash; which I read as:
+          helpful for the person who has to coordinate four engineering
+          disciplines toward a schedule.
+        </p>
+        <p>
+          On the side, I build software &mdash; mostly graph-based reasoning
+          tools and methodology-aware project management. <span class="accent">It started as a way to think more clearly about my day job.</span>
+          A few of those tools are referenced in the demonstration projects above.
+        </p>
+      </div>
+
+      <aside class="credentials scroll-reveal">
+        <h5>The relevant subset</h5>
+        <ul>
+          <li><span class="key">Lead</span>Cross-functional engineering team, two production programs</li>
+          <li><span class="key">Methods</span>DFMEA, FTA, SysML v2, AIAG-VDA, DVP&amp;R</li>
+          <li><span class="key">Domain</span>Mechanical, electrical, embedded integration</li>
+          <li><span class="key">Locale</span>Detroit metro &mdash; in-office is realistic</li>
+          <li><span class="key">More</span><a href="https://jafner.com/about">jafner.com/about</a></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- ============================== CLOSING ========================= -->
+  <footer class="closing">
+    <div class="closing-inner">
+      <div class="scroll-reveal">
+        <h3>If any of this <em>resonates&hellip;</em></h3>
+        <p>
+          I'd value a thirty-minute conversation. I can come to The Icon, or
+          do video, whichever's easier for you. No expectations beyond that.
+        </p>
+        <p>
+          If it doesn't &mdash; no hard feelings, and good luck with the launch.
+        </p>
+      </div>
+      <div class="links scroll-reveal">
+        <a href="mailto:[email protected]">
+          <span>Email</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a href="https://www.linkedin.com/in/jeffhafner/" target="_blank" rel="noopener">
+          <span>LinkedIn</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a href="https://jafner.com">
+          <span>jafner.com</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="colophon">
+      <span>&mdash; Jeff Hafner</span>
+      <span>Cold inquiry &middot; not a recruiter pitch</span>
+      <span>jafner.com</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll-triggered reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

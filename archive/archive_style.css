@@ -1,0 +1,268 @@
+body {
+  max-width: 40em;
+  margin: 0 auto;
+  padding: 5px;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  line-height: 1.6em;
+  color: black;
+}
+h1, h2, h3 {
+  font-family: sans-serif;
+  font-weight: normal;
+}
+
+h2 {
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-size: 1.8em;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #551a8b;
+}
+
+.medium_img{
+  width:70%;
+}
+
+/* Content sections */
+.content-section {
+  margin-bottom: 2em;
+}
+
+/* Items container */
+.items-container {
+  margin: 1.5em 0;
+}
+
+/* Article items (books, products, podcasts) */
+.book-item,
+.product-item,
+.podcast-item,
+.gift-item {
+  margin-bottom: 1em;
+  padding-bottom: 1.25em;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.book-item:last-child,
+.product-item:last-child,
+.podcast-item:last-child {
+  border-bottom: none;
+}
+
+/* Titles */
+.book-title,
+.product-title,
+.podcast-title,
+.gift-title {
+  font-family: sans-serif;
+  font-weight: normal;
+  margin: 0 0 0.5em 0;
+  font-size: 1.2em;
+}
+
+/* Author styling */
+.book-author {
+  font-style: italic;
+  color: #555;
+  margin: 0 0 0.75em 0;
+  font-size: 0.95em;
+}
+
+/* Description text */
+.book-description,
+.product-description,
+.podcast-description,
+.gift-description,
+.book-bonus {
+  margin: 0.5em 0;
+  line-height: 1.6em;
+}
+
+/* Links section */
+.book-links {
+  margin-top: 0.75em;
+}
+
+.book-link {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+/* Category group sections */
+.category-group {
+  margin-top: 2.5em;
+  margin-bottom: 2em;
+}
+
+.category-group h3 {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #333;
+}
+
+.category-group:first-of-type {
+  margin-top: 1em;
+}
+
+
+
+/* Code Styling */
+code {
+  background-color: #f4f4f4;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #c7254e;
+}
+
+pre {
+  background-color: #f4f4f4;
+  padding: 1em;
+  border-radius: 5px;
+  border-left: 4px solid #0066cc;
+  overflow-x: auto;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* Note box styling */
+.note-box, .warning-box, .tip-box {
+  padding: 0.5em;
+  margin: 0.5em 0;
+  border-radius: 5px;
+  border-left: 4px solid;
+}
+
+.note-box {
+  background-color: #e7f3ff;
+  border-left-color: #0066cc;
+}
+
+.warning-box {
+  background-color: #fff3cd;
+  border-left-color: #ffc107;
+}
+
+.tip-box {
+  background-color: #d4edda;
+  border-left-color: #28a745;
+}
+
+.callout-title {
+  font-weight: bold;
+  margin-bottom: 0.25em;
+}
+
+/* Lists Styling */
+main {
+  counter-reset: section -1;
+}
+
+article.toc_item h3::before {
+  counter-increment: section;
+  content: counter(section) ". ";
+  
+}
+
+.toc_item ol, .toc_item ul {
+  margin: 1em 0;
+  line-height: 1.8em;
+}
+
+.toc_item li {
+  margin-bottom: 0.5em;
+}
+
+.toc_item ol ol, .toc_item ul ul {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.setup-card {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1.5em;
+  margin: 1.5em 0;
+}
+
+.setup-card h4 {
+  margin-top: 0;
+  font-family: sans-serif;
+  color: #0066cc;
+  border-bottom: 2px solid #0066cc;
+  padding-bottom: 0.5em;
+}
+
+
+/* Step Number Styling */
+.step-list {
+  counter-reset: step-counter;
+  list-style: none;
+  padding-left: 0;
+}
+
+.step-list li {
+  counter-increment: step-counter;
+  margin-bottom: 1.5em;
+  padding-left: 3em;
+  position: relative;
+}
+
+.step-list li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #0066cc;
+  color: white;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Collapsible Sections */
+details {
+  margin: 1em 0;
+  padding: 0.5em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5em;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+summary:hover {
+  background-color: #e8e8e8;
+}
+
+details[open] summary {
+  margin-bottom: 1em;
+}
