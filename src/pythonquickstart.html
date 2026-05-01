@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Getting Started with Python</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1><a href="index.html">jafner.com</a></h1>
+            <hr>
+        </header>
+        
+        <main>
+            <!--NAV-->
+            
+            <h2>Getting Started with Python</h2>
+            <ol start="0">
+                <li><a href="#why_python">Why Python for Mechanical Engineers?</a></li>
+                <li><a href="#setup">Setting Up Your System</a> </li>
+                <li><a href="#how_to_run_code">How to Run Code</a></li>
+                <li><a href="#basic_python">Basic Python</a></li>
+                <li><a href="#reading_data">Reading Data</a></li>
+                <li><a href="#plotting_data">Plotting Data</a></li>
+                <li><a href="#automating_tasks">Automating Tasks</a></li>
+                <li><a href="#engineering_math">Engineering Math in Python</a></li>
+                <li><a href="#hands_on_labs">Hands-On Labs</a></li>
+                <li><a href="#additional_resources">Additional Resources</a></li>
+            </ol>
+
+            <article id="why_python" class="toc_item">
+                <h3>Why Python for Mechanical Engineers?</h3>
+                <p>Python is a great solution for non-software engineers to get things done. 
+                    It has a robust library of tools and a supportive community that makes it easy to find solutions.
+                    It is fast (compared to most engineering tools) and flexible for data analysis, automation, and visualization. </p>
+                <p>It's similar to Matlab, but Python is free and open source.</p>
+                <p>It can overlap with Excel, but Python can handle large datasets and complex calculations with ease - no waiting for a plot to load or hitting the row limits in a spreadsheet.</p>
+                <p>Also, due to how it installs, at least in my experience, it is not typically blocked by corporate IT limitations - you're not sneaking, it's just not a problem</p>
+                <div class="tip-box">
+                    <div class="callout-title">Setting Expectations</div>
+                    <p>This is an introduction to help you get things done, with the methods I've found best for me - this is not exhaustive nor will it qualify you as a software engineer. 
+                    If you work through this page you've merely passed your driver's test - you are not even close to being a professional racer. </p>
+                </div>
+            </article>
+
+            <article id="setup" class="toc_item">
+                <h3>Setting Up Your System</h3>
+                <p>This setup works well for me, and should for you too - but there is no shortage of good alternatives to try out!</p>
+
+                <div class="note-box">
+                    <div class="callout-title">Important Note</div>
+                    <p>This is setup for Windows machines - process on Mac or Linux will be similar, but different</p>
+                </div>
+
+                <div class="setup-card">
+                <h4>Install Python</h4>
+                <ol>
+                    <li>Download <a href="https://www.python.org/downloads/">the latest version of Python for your system from the website</a></li>
+                    <li>Run the installer - make sure to check the box that says "Add Python to PATH" before clicking "Install Now"</li>
+                    <li> That's it - you have Python installed!</li>
+                </ol>
+                </div>
+
+                <div class="setup-card">
+                <h4>Install an IDE</h4>
+                <p>An IDE is an Integrated Development Environment - a tool that helps you write, manage, and run your code more easily.</p>
+                <p>You don't <em>have to</em> use and IDE, but it makes a lot of things easier and faster</p>
+                <ol>
+                    <li>Download <a href="https://code.visualstudio.com/" target="_blank">VSCode</a> and install it</li>
+                    <li>Open VSCode, go to the Extensions tab (left sidebar, square icon), search for "Python" and install the extension by Microsoft</li>
+                    <li>Also install the Jupyter extension by Microsoft</li>
+                    <li>Restart VSCode and you should be good to go - you can customize settings and additional extensions as you want</li>
+                </ol>
+                </div>
+
+                <div class="setup-card">
+                <h4>Create your first Virtual Environment</h4>
+                <p>This is another thing you don't <em>have to </em> do, but wlearn the habit now and it will keep projects organized for future you</p>
+                <div class="note-box">
+                    <div class="callout-title">Note on Virtual Environments</div>
+                    <p>This is a self contained environment for your project (a specific folder with its own Python installation and packages) - <strong>you will need to do this again for each project.</strong></p>
+                </div>
+                <ol>
+                    <li>Create a folder for your first project - do it in command prompt if you want, or just a new folder in Windows Explorer or VSCode</li>
+                    <li>Navigate to that folder in command prompt or powershell
+                        <ol>
+                            <li>In command prompt/powershell use "cd [filepath]" to get there</li>
+                            <li>In VSCode, open the folder and then open the integrated terminal and you'll be in the right spot - see it's a handy tool!</li>
+                        </ol>
+                    </li>
+                    <li>Create the virtual environment by running the command: <code>python -m venv .venv</code></li>
+                    <li>Activate the virtual environment:
+                        <ul>
+                            <li>In command prompt, run: <code>.venv\Scripts\activate.bat</code></li>
+                            <li>In powershell, run: <code>.venv\Scripts\Activate.ps1</code></li>
+                            <details>
+                                <summary>Execution Policy Errors</summary>
+                                <p>I have run into execution policy issues when trying to run this command in powershell. 
+                                    If you get an error, you can bypass it... but just switch to command prompt or use the VSCode terminal.</p>
+                            </details>
+                            <li>In VSCode terminal, it should auto activate when you open the terminal - if not use the powershell command</li>
+                        </ul>    
+                    </li>
+                    <li>You should see the terminal prompt change to show the virtual environment is active - something like: <code>(.venv) C:\Users\you\path\to\project&gt;</code></li>
+                    <li>While in here, let's install some packages via pip - these are essentially python toolboxes; run <code>pip install pandas numpy matplotlib plotly</code>
+                    <ol>
+                        <li>These are the packages we'll be using in this guide - pandas for data manipulation, numpy for numerical operations, matplotlib and plotly for plotting</li>
+                        <li>We will likely install more later, but this is a good start.</li>
+                    </ol>
+                    </li>
+                    <li>To deactivate the virtual environment when you're done working, just run the command: <code>deactivate</code></li>   
+                    <li>Next time you come back, just re-run the activation script and the environment will how you left it.</li>
+                </ol>
+                </div>
+            </article>
+
+             <article id="how_to_run_code" class="toc_item">
+                <h3>How to Run Code</h3>
+                <h4>Objectives</h4>
+                <ul>
+                    <li>Understand how to run Python code in different environments</li>
+                    <li>Learn the basics of using an IDE (VSCode)</li>
+                    <li>Learn how to use Jupyter Notebooks</li>
+                </ul>
+                <div class="setup-card">
+                    <h4>Running Python In the Terminal</h4>
+                    <p>This is the most basic way to run Python code - directly in your terminal.
+                        It isn't a <em>bad</em> way to start, but it's not the most efficient and will have you jumping between tools.
+                        We'll walk through here for the sake of completeness, but I recommend mostly forgetting about this after this section, until you find a reason to come back to it.
+                    </p>
+                    <ol>
+                        <li>Open your terminal (command prompt, powershell, or VSCode terminal)</li>
+                        <li>Make sure your virtual environment is activated (see previous section)</li>
+                        <li>Create a new Python file in your project folder - you can do this in VSCode or any text editor. Name it <code>hello.py</code></li>
+                        <li>Add the following code to the file (using VSCode or a text editor such as Notepad):
+                            <pre><code>print("Hello, World!")</code></pre>
+                        </li>
+                        <li>Save the file</li>
+                        <li>In the terminal, run the script by typing: <code>python hello.py</code></li>
+                        <li>You should see the output: <code>Hello, World!</code></li>
+                    </ol>
+                    <p>And there you have  it - running your first Python script in the terminal - you're a real hackerman!
+                         But now let's move on to more practical and efficient ways to run Python code.
+                    </p>
+                </div>
+
+                <div class="setup-card">
+                    <h4>Running Python in VSCode</h4>
+                    <p>VSCode makes it easy to write and run Python code with its built-in features and extensions.</p>
+                    <ol>
+                        <li>Open your project folder in VSCode</li>
+                        <li>Create a new Python file named <code>hello_vscode.py</code></li>
+                        <li>Add the same code as before, with a small modification:
+                            <pre><code>print("Hello, World from VSCode!")</code></pre>
+                        </li>
+                        <li>Save the file</li>
+                        <li>Right-click anywhere in the file or click the "Run" button and select "Run Python File in Terminal"</li>
+                        <li>You should see the output: <code>Hello, World from VSCode!</code> show up in the integrated terminal (probably the bottom of your screen)</li>
+                    </ol>
+                    <p>VSCode also offers features like IntelliSense (code completion), debugging, and version control integration, making it a powerful tool for Python development.
+                        It's not a dedicated Python IDE, but it's very effective and will let you work well with other file types as well.
+                    </p>
+                    <p>
+                        VSCode also has a lot of extensions for convenience - we've installed some alreayd, but go ahead and epxlore if any catch your attention or you think there should be a certain capability.
+                    </p>
+                </div>
+
+                <div class="setup-card"> 
+                    <h4>Running Python in Jupyter Notebooks</h4>
+                    <p>Jupyter Notebooks are an interactive way to write and run Python code, combining code, text, and visualizations in a single document.</p>
+                    <ol>
+                        <li>In your terminal (with the virtual environment activated), install Jupyter by running: <code>pip install jupyter</code> <em>(you only need to do this once per virtual environment)</em></li>
+                        <li>In VSCode, create a new file titled <code>hello_jupyter.ipynb</code></li>
+                        <li>Open the file in VSCode - it should open in the Jupyter Notebook interface</li>
+                        <li>In the first cell (should be code type by default), type:
+                            <pre><code>print("Hello, World from Jupyter!")</code></pre>
+                        </li>
+                        <li>Press Shift + Enter to run the cell</li>
+                        <li>You should see the output: <code>Hello, World from Jupyter!</code> below the cell</li>
+                    </ol>
+                    <p>Jupyter Notebooks are great for data analysis, visualization, and sharing your work with others.
+                        They allow you to document your code and results in a clear and organized manner via markdown cells interspersed within the code blocks.
+                    </p>
+                </div>
+            </article>
+
+            
+            <article id="basic_python" class="toc_item">
+                <h3>Basic Python</h3>
+                <h4>Objectives </h4>    
+                <ul>
+                    <li>Understand basic Python syntax and structure</li>
+                    <li>Learn about variables, data types, and control flow</li>
+                    <li>Get familiar with functions and modules</li>
+                </ul>   
+                <div class="tip-box"> 
+                    <div class="callout-title">Limitations of this Section</div>
+                    <p>This may be the most underdeveloped section of this page - 
+                        my goal is to give you just enough information to get things done.</p>
+                </div>
+
+                <p>Python is known for its simple and readable syntax, making it easy to learn and use. 
+                    Here are some basic concepts to get you started:</p>
+                <ul>
+                    <li><strong>White Space:</strong> Python uses indentation (I use 4 spaces)to define blocks of code. Proper indentation is crucial for the code to run correctly.    
+                        <pre><code>def function_with_proper_whitespace():
+    print("Hello, World!")</code></pre> 
+                        <pre><code>def function_with_wrong_whitespace():
+print("This will cause an IndentationError")</code></pre>
+                    </li>
+                    <li><strong>Variables:</strong> Used to store data values. Python has dynamic typing, so you don't need to declare variable types explicitly.
+                        <pre><code>x = 10</code></pre>
+                    </li>
+                    <li><strong>Data Types:</strong> Common data types include integers, floats, strings, lists, tuples, and dictionaries.
+                        <pre><code>my_list = [1, 2, 3]</code></pre>
+                    </li>
+                    <li><strong>Control Flow:</strong> Includes conditional statements (if, elif, else) and loops (for, while).
+                        <pre><code>if x &gt; 5:
+    print("x is greater than 5")</code></pre>
+                    </li>       
+                    <li><strong>Functions:</strong> Blocks of reusable code defined using the def keyword.
+                        <pre><code>def greet(name):
+    print(f"Hello, {name}!")</code></pre>
+                    </li>
+                    <li><strong>Modules:</strong> Files containing Python code that can be imported and used in other Python files.
+                        <pre><code>import math
+print(math.sqrt(16))  # Outputs: 4.0</code></pre>
+                    </li>
+                    <li><strong>Comments:</strong> Use the # symbol for single-line comments and triple quotes (''' or """) for multi-line comments.
+                        <pre><code># This is a single-line comment
+"""This is a 
+multi-line comment"""</code></pre>
+                    </li>   
+                </ul>       
+
+                <p>And there you have it - a very incomplete introduction to Python. As you work through the examples and labs, you'll become more familiar with Python's capabilities and syntax.</p>
+
+            </article>
+            
+            <article id="reading_data" class="toc_item">
+                <h3>Reading Data</h3>
+                
+            </article>
+
+            <article id="plotting_data" class="toc_item">
+                <h3>Plotting Data</h3>
+            </article>
+
+            <article id="automating_tasks" class="toc_item">
+                <h3>Automating Tasks</h3>
+            </article>
+        
+            <article id="engineering_math" class="toc_item">
+                <h3>Engineering Math in Python</h3>
+            </article>
+
+            <article id="hands_on_labs" class="toc_item">
+                <h3>Hands-On Labs</h3>
+            </article>
+
+            <article id="additional_resources" class="toc_item">
+                <h3>Additional Resources</h3>
+            </article>
+        
+        </main>
+        
+        <!--FOOTER-->
+
+    </body>
+</html>

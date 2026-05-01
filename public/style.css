@@ -1,0 +1,369 @@
+/* =====================================================================
+ * jafner.com — core site styles
+ * ---------------------------------------------------------------------
+ * Tokens, base typography, shell (nav + footer), shared primitives.
+ * Page-specific styles live inline in <style> blocks on each page.
+ * ===================================================================== */
+
+
+/* ---------- Self-hosted fonts -----------------------------------------
+ * Place the variable woff2 files in /assets/fonts/.
+ * Sources:
+ *   Fraunces:   https://github.com/undercase/fraunces
+ *   Geist:      https://github.com/vercel/geist-font
+ * Use the variable woff2 files (not static cuts) — the about page
+ * relies on Fraunces' SOFT, WONK, and opsz axes for the italic accents.
+ * --------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/assets/fonts/Geist[wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/assets/fonts/GeistMono[wght].woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ---------- Tokens ----------------------------------------------------
+ * One source of truth for color and spacing.
+ * Edit here and every page picks it up.
+ * --------------------------------------------------------------------- */
+:root {
+  /* Color */
+  --bg:         #F2F0EA;
+  --bg-soft:    #EAE6DC;
+  --bg-deep:    #E0DBCC;
+  --ink:        #0F2847;
+  --ink-soft:   #3A4D6B;
+  --ink-muted:  #80836A;
+  --rule:       #D0CCBE;
+  --rule-soft:  #DDD9CC;
+  --accent:     #1E5AA8;
+  --accent-soft:#6B92C7;
+  --moss:       #3A5848;
+  --gold:       #B88A2A;
+
+  /* Spacing scale (use these instead of magic numbers) */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 128px;
+}
+
+
+/* ---------- Reset and base -------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Subtle ambient color wash — adds depth without being noisy */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 15% 8%,  rgba(30, 90, 168, 0.05) 0%, transparent 35%),
+    radial-gradient(circle at 85% 75%, rgba(58, 88, 72, 0.04) 0%, transparent 40%);
+}
+
+a { color: inherit; }
+
+
+/* ---------- Layout container ----------------------------------------- */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+section { padding: 88px 0; position: relative; }
+
+
+/* ---------- Top nav (shared across all pages) ------------------------ */
+.topnav {
+  padding: 28px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.topnav .mark a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s;
+}
+.topnav .mark a:hover { color: var(--accent); }
+.topnav .dot {
+  width: 7px; height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(30, 90, 168, 0.12);
+}
+.topnav .links {
+  display: flex;
+  gap: 28px;
+}
+.topnav .links a {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.topnav .links a:hover,
+.topnav .links a[aria-current="page"] {
+  color: var(--accent);
+}
+
+
+/* ---------- Section header (reusable pattern) ------------------------ */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 52px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--rule);
+}
+.section-header .num {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+.section-header h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 450;
+  font-variation-settings: 'opsz' 96, 'SOFT' 50;
+  font-size: clamp(30px, 4vw, 42px);
+  letter-spacing: -0.022em;
+  color: var(--ink);
+}
+.section-header h2 em {
+  font-style: italic;
+  color: var(--accent);
+  font-variation-settings: 'opsz' 96, 'SOFT' 100, 'WONK' 1;
+}
+
+
+/* ---------- Pill (reusable tag) -------------------------------------- */
+.pill {
+  display: inline-block;
+  padding: 4px 11px;
+  margin: 3px 4px 3px 0;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  font-size: 13.5px;
+  color: var(--ink);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.pill:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+
+/* ---------- Live pulse indicator (reusable) -------------------------- */
+.live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+.live .pulse {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--moss);
+  position: relative;
+}
+.live .pulse::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--moss);
+  animation: pulseRing 2s ease-out infinite;
+}
+@keyframes pulseRing {
+  0%   { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2);   opacity: 0; }
+}
+
+
+/* ---------- Footer (shared shell) ------------------------------------ */
+.footer {
+  padding: 88px 0 56px;
+  border-top: 1px solid var(--rule);
+  margin-top: 56px;
+  position: relative;
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.footer h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-variation-settings: 'opsz' 96, 'SOFT' 50, 'WONK' 1;
+  font-size: clamp(40px, 5.5vw, 64px);
+  line-height: 1.0;
+  letter-spacing: -0.028em;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.footer h3 em {
+  font-style: italic;
+  color: var(--accent);
+  font-variation-settings: 'opsz' 96, 'SOFT' 100, 'WONK' 1;
+}
+.footer .footer-text {
+  font-family: 'Fraunces', serif;
+  font-weight: 380;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 480px;
+}
+.footer .links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.footer .links a {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.2s, padding 0.2s;
+}
+.footer .links a:hover {
+  color: var(--accent);
+  padding-left: 8px;
+}
+.footer .links a .arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+.footer .links a:hover .arrow { transform: translateX(5px); }
+
+.colophon {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px dashed var(--rule);
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 600px) {
+  .colophon { flex-direction: column; gap: 8px; }
+}
+
+
+/* ---------- Animations (reusable) ------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: revealUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+@keyframes revealUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.25s; }
+.delay-3 { animation-delay: 0.4s; }
+.delay-4 { animation-delay: 0.55s; }
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ---------- Accessibility -------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

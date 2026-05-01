@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeff Hafner — Product Systems Integration Lead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-bg: #f8f6f1;
+    --color-surface: #ffffff;
+    --color-text: #2c2c2c;
+    --color-text-secondary: #5a5a5a;
+    --color-accent: #1a3a4a;
+    --color-rule: #d4cfc6;
+    --color-highlight: #c7553b;
+    --font-display: 'Libre Baskerville', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  /* Header */
+  header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .overline {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-highlight);
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Sections */
+  section {
+    margin-bottom: 2.75rem;
+  }
+
+  section h2 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+
+  section p {
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  section p:last-child {
+    margin-bottom: 0;
+  }
+
+  section ul {
+    margin: 0.25rem 0 1rem 1.25rem;
+    padding: 0;
+  }
+
+  section ul li {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: 0.2rem;
+  }
+
+  /* Callout quote */
+  .callout {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.55;
+    color: var(--color-accent);
+    padding: 1.25rem 0 1.25rem 1.5rem;
+    border-left: 2px solid var(--color-rule);
+    margin: 1.5rem 0 2rem;
+  }
+
+  /* Role grid */
+  .role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 520px) {
+    .role-grid { grid-template-columns: 1fr; }
+  }
+
+  .role-card {
+    background: var(--color-surface);
+    padding: 1.25rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .role-card .label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-highlight);
+    margin-bottom: 0.4rem;
+  }
+
+  .role-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin: 0 0 0.3rem;
+  }
+
+  /* Not-box */
+  .not-box {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-rule);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 6px 6px 0;
+    margin-top: 0.5rem;
+  }
+
+  .not-box p {
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.35rem;
+  }
+
+  .not-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .not-box .note {
+    margin-top: 0.75rem;
+    font-size: 0.92rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  /* Impact list */
+  .impact-list {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+  }
+
+  .impact-list li {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--color-rule);
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+
+  .impact-list li:last-child {
+    border-bottom: none;
+  }
+
+  .impact-list li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--color-highlight);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    top: -1px;
+  }
+
+  /* Dividers */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-rule);
+    margin: 3rem 0;
+  }
+
+  .page-break {
+    border: none;
+    border-top: 2px solid var(--color-accent);
+    margin: 3.5rem 0;
+  }
+
+  /* FAQ */
+  .faq-intro {
+    margin-bottom: 1.5rem;
+  }
+
+  .faq-intro h2 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-rule);
+    padding: 1.1rem 0;
+  }
+
+  .faq-item:first-of-type {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .faq-question {
+    font-family: var(--font-display);
+    font-size: 0.93rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+
+  .faq-item.open .faq-question::after {
+    content: '−';
+  }
+
+  .faq-answer {
+    display: none;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    padding: 0.6rem 2rem 0 0;
+  }
+
+  .faq-item.open .faq-answer {
+    display: block;
+  }
+
+  .faq-answer p {
+    margin-bottom: 0.5rem;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .faq-answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-answer ul {
+    margin: 0.3rem 0 0 1.25rem;
+    padding: 0;
+  }
+
+  .faq-answer ul li {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    margin-bottom: 0.15rem;
+  }
+
+  /* 90-day timeline */
+  .timeline {
+    margin-top: 1rem;
+  }
+
+  .timeline-phase {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--color-rule);
+    align-items: start;
+  }
+
+  .timeline-phase:last-child {
+    border-bottom: none;
+  }
+
+  .phase-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-highlight);
+    padding-top: 0.15rem;
+  }
+
+  .phase-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    margin-bottom: 0.35rem;
+  }
+
+  .phase-body p {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+    line-height: 1.5;
+  }
+
+  .phase-signal {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
+  }
+
+  /* Closing */
+  .closing {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--color-accent);
+    text-align: center;
+    padding: 2rem 1.5rem 0;
+  }
+
+  /* Footer */
+  footer {
+    padding-top: 2rem;
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--color-rule);
+    text-align: center;
+  }
+
+  footer .name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-accent);
+    margin-bottom: 0.25rem;
+  }
+
+  footer .tagline {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  footer .linkedin-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    font-size: 0.82rem;
+    transition: color 0.15s ease;
+  }
+
+  footer .linkedin-link:hover {
+    color: var(--color-accent);
+  }
+
+  footer .linkedin-link svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 2rem 1.25rem 3rem; }
+    h1 { font-size: 1.6rem; }
+    .callout { font-size: 1rem; }
+    .timeline-phase {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+    .phase-label { margin-bottom: 0.15rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <p class="overline">Role Concept</p>
+    <h1>Product Systems Integration Lead</h1>
+    <p class="subtitle">Making complex engineering systems come together in reality.</p>
+  </header>
+
+  <!-- THE OPPORTUNITY -->
+  <section>
+    <h2>The Opportunity</h2>
+    <p>In complex product development, teams are often strong within their domains — but the system is not actively managed as a whole.</p>
+    <ul>
+      <li>Mechanical, electrical, and software teams progress independently</li>
+      <li>Timelines align to functions, not system integration needs</li>
+      <li>Issues surface late — during validation or integration</li>
+    </ul>
+    <p>This results in late-stage surprises, rework, and reactive execution.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- THE ROLE -->
+  <section>
+    <h2>The Role</h2>
+    <p>The Product Systems Integration Lead ensures that cross-functional engineering efforts come together into a coherent, functioning system.</p>
+    <div class="callout">Existing roles get the work done. This role ensures the right work is done together.</div>
+    <p>This role operates across engineering, program management, and validation to:</p>
+    <ul>
+      <li>Align system-level dependencies early</li>
+      <li>Improve cross-functional decision-making</li>
+      <li>Reduce integration risk before it appears</li>
+    </ul>
+  </section>
+
+  <hr class="divider">
+
+  <!-- WHAT THIS ROLE DOES -->
+  <section>
+    <h2>What This Role Does</h2>
+    <div class="role-grid">
+      <div class="role-card">
+        <p class="label">Align System Behavior</p>
+        <p>Make interfaces, dependencies, and timing across teams explicit.</p>
+        <p>Ensure system-level readiness — not just component completion.</p>
+      </div>
+      <div class="role-card">
+        <p class="label">Improve Decision-Making</p>
+        <p>Enable tradeoffs to be made with full system context.</p>
+        <p>Prevent downstream conflicts from siloed decisions.</p>
+      </div>
+      <div class="role-card">
+        <p class="label">Reduce Integration Risk</p>
+        <p>Surface misalignment early.</p>
+        <p>Prevent late-stage validation and integration issues.</p>
+      </div>
+      <div class="role-card">
+        <p class="label">Enable Teams</p>
+        <p>Introduce lightweight structure only where it adds value.</p>
+        <p>Help teams move faster with fewer surprises.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- WHAT THIS ROLE IS NOT -->
+  <section>
+    <h2>What This Role Is Not</h2>
+    <div class="not-box">
+      <p>Not a process or compliance function</p>
+      <p>Not focused on enforcing templates or stage-gates</p>
+      <p>Not a downstream review or approval layer</p>
+      <p class="note">This role is focused on improving system-level outcomes, not enforcing process.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- REPRESENTATIVE IMPACT -->
+  <section>
+    <h2>Representative Impact</h2>
+    <ul class="impact-list">
+      <li>Fewer late-stage integration issues</li>
+      <li>Better alignment between component readiness and system needs</li>
+      <li>More predictable validation and delivery timelines</li>
+      <li>Improved cross-functional clarity and execution</li>
+    </ul>
+  </section>
+
+  <!-- PAGE 2 -->
+  <hr class="page-break">
+
+  <!-- FAQ -->
+  <div class="faq-intro">
+    <h2>FAQ</h2>
+  </div>
+
+  <div class="faq-item open">
+    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">How is this different from Systems Engineering?</div>
+    <div class="faq-answer">
+      <p>Systems engineering defines architecture and requirements. This role ensures those come together in execution — aligning timelines, decisions, and interactions so the system works in reality.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">How is this different from Program Management?</div>
+    <div class="faq-answer">
+      <p>Program managers manage schedule and coordination. This role ensures the technical dependencies behind the schedule are aligned, so timelines reflect system integration needs.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">How is this different from Product Assurance / Quality?</div>
+    <div class="faq-answer">
+      <p>Product assurance ensures process compliance. This role is upstream and outcome-focused — preventing issues by improving alignment and decisions early.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">Is this already covered by existing roles?</div>
+    <div class="faq-answer">
+      <p>Elements exist across roles, but are typically secondary priorities. This role makes system-level integration an explicit responsibility.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">What does success look like?</div>
+    <div class="faq-answer">
+      <ul>
+        <li>Fewer late-stage surprises</li>
+        <li>Improved integration readiness</li>
+        <li>More predictable delivery</li>
+        <li>Better cross-functional decision-making</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FIRST 90 DAYS -->
+  <section>
+    <h2>First 90 Days</h2>
+    <div class="timeline">
+
+      <div class="timeline-phase">
+        <div class="phase-label">Days 0–30</div>
+        <div class="phase-body">
+          <p class="phase-title">Understand & Map</p>
+          <p>Build system-level view of current programs.</p>
+          <p>Identify integration risks and timing misalignment.</p>
+          <p class="phase-signal">"This is the first time we've seen how this connects."</p>
+        </div>
+      </div>
+
+      <div class="timeline-phase">
+        <div class="phase-label">Days 30–60</div>
+        <div class="phase-body">
+          <p class="phase-title">Align & Pilot</p>
+          <p>Create combined cross-functional timeline.</p>
+          <p>Align key dependencies across teams.</p>
+          <p class="phase-signal">"We're catching issues earlier."</p>
+        </div>
+      </div>
+
+      <div class="timeline-phase">
+        <div class="phase-label">Days 60–90</div>
+        <div class="phase-body">
+          <p class="phase-title">Embed & Scale</p>
+          <p>Establish lightweight alignment practices.</p>
+          <p>Enable teams to maintain system clarity.</p>
+          <p class="phase-signal">"Things are more predictable now."</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <p class="closing">This role ensures that strong teams don't just deliver their parts — but deliver a system that works together.</p>
+
+  <footer>
+    <p class="name">Jeff Hafner</p>
+    <p class="tagline">Engineering Manager · Systems Integration · Cross-Discipline Program Leadership</p>
+    <a class="linkedin-link" href="https://www.linkedin.com/in/jeffrey-hafner" target="_blank" rel="noopener">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn Profile
+    </a>
+  </footer>
+
+</div>
+</body>
+</html>
