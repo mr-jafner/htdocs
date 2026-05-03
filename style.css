@@ -16,28 +16,28 @@
  * --------------------------------------------------------------------- */
 @font-face {
   font-family: 'Fraunces';
-  src: url('/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2') format('woff2-variations');
+  src: url('/assets/fonts/fraunces_normal.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Fraunces';
-  src: url('/assets/fonts/Fraunces-Italic[SOFT,WONK,opsz,wght].woff2') format('woff2-variations');
+  src: url('/assets/fonts/fraunces_italic.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Geist';
-  src: url('/assets/fonts/Geist[wght].woff2') format('woff2-variations');
+  src: url('/assets/fonts/geist_normal.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Geist Mono';
-  src: url('/assets/fonts/GeistMono[wght].woff2') format('woff2-variations');
+  src: url('/assets/fonts/geist_mono_normal.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -77,6 +77,9 @@
 }
 
 
+.medium_img{
+  width:70%;
+}
 /* ---------- Reset and base -------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -115,7 +118,10 @@ a { color: inherit; }
   z-index: 1;
 }
 
-section { padding: 88px 0; position: relative; }
+.content-section { padding: 48px 0; position: relative; }
+
+.category-group { margin-bottom: 48px; }
+.category-group:last-child { margin-bottom: 0; }
 
 
 /* ---------- Top nav (shared across all pages) ------------------------ */
@@ -350,6 +356,264 @@ section { padding: 88px 0; position: relative; }
   opacity: 1;
   transform: translateY(0);
 }
+
+
+/* ---------- Inline code & code blocks --------------------------------
+ * Used heavily on pythonquickstart.html.
+ * --------------------------------------------------------------------- */
+code {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.9em;
+  background: var(--bg-soft);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--ink);
+}
+pre {
+  background: var(--bg-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  overflow-x: auto;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.9em;
+  line-height: 1.55;
+}
+pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+
+/* ---------- Callouts (note / warning / tip) --------------------------
+ * .callout-title is the small mono label inside a callout.
+ * --------------------------------------------------------------------- */
+.note-box,
+.warning-box,
+.tip-box {
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-radius: 4px;
+  border-left: 3px solid;
+}
+.note-box {
+  background: rgba(30, 90, 168, 0.06);
+  border-left-color: var(--accent);
+}
+.warning-box {
+  background: rgba(184, 138, 42, 0.08);
+  border-left-color: var(--gold);
+}
+.tip-box {
+  background: rgba(58, 88, 72, 0.07);
+  border-left-color: var(--moss);
+}
+.callout-title {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+
+
+/* ---------- Setup card (grouped instruction block) ------------------- */
+.setup-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+.setup-card h4 {
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.1em;
+  color: var(--accent);
+}
+
+
+/* ---------- Step-numbered list --------------------------------------- */
+.step-list {
+  counter-reset: step-counter;
+  list-style: none;
+  padding-left: 0;
+}
+.step-list li {
+  counter-increment: step-counter;
+  margin-bottom: 24px;
+  padding-left: 48px;
+  position: relative;
+}
+.step-list li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Geist Mono', monospace;
+  font-weight: 600;
+}
+
+
+/* ---------- Collapsible details -------------------------------------- */
+details {
+  margin: 16px 0;
+  padding: 8px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--bg-soft);
+}
+summary {
+  cursor: pointer;
+  padding: 6px 8px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+summary:hover { background: var(--bg-deep); }
+details[open] summary { margin-bottom: 12px; }
+
+
+/* ---------- TOC-style article numbering ------------------------------
+ * <article class="toc_item"> blocks auto-number their h3 headings.
+ * counter-reset starts at -1 so the first article reads "0." (matches
+ * the <ol start="0"> table-of-contents on pythonquickstart.html).
+ * --------------------------------------------------------------------- */
+main { counter-reset: section -1; }
+article.toc_item { margin-top: 40px; }
+article.toc_item h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 450;
+  font-variation-settings: 'opsz' 96, 'SOFT' 50;
+  font-size: clamp(22px, 2.5vw, 30px);
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+article.toc_item h3::before {
+  counter-increment: section;
+  content: counter(section) ". ";
+  color: var(--ink-muted);
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.6em;
+  letter-spacing: 0.06em;
+  margin-right: 8px;
+  vertical-align: 0.3em;
+}
+article.toc_item h4 {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.05em;
+  margin: 16px 0 8px;
+  color: var(--ink);
+}
+.toc_item ol,
+.toc_item ul {
+  margin: 12px 0 12px 24px;
+  line-height: 1.7;
+}
+.toc_item li { margin-bottom: 6px; }
+.toc_item ol ol,
+.toc_item ul ul {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+
+/* ---------- Item cards (books / products / podcasts / gifts) ---------
+ * Used on shareables.html and gifts.html.
+ * --------------------------------------------------------------------- */
+.items-container { margin: 24px 0; }
+
+.book-item,
+.product-item,
+.podcast-item,
+.gift-item {
+  padding: 20px 0 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.book-item:last-child,
+.product-item:last-child,
+.podcast-item:last-child,
+.gift-item:last-child { border-bottom: none; }
+
+.book-title,
+.product-title,
+.podcast-title,
+.gift-title {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.15em;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.book-author {
+  font-style: italic;
+  color: var(--ink-muted);
+  margin: 0 0 10px;
+  font-size: 0.95em;
+}
+.book-description,
+.product-description,
+.podcast-description,
+.gift-description,
+.book-bonus {
+  margin: 6px 0;
+  color: var(--ink-soft);
+}
+.book-link,
+.product-link,
+.podcast-link,
+.gift-link {
+  display: inline-block;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-decoration: none;
+}
+.book-link:hover,
+.product-link:hover,
+.podcast-link:hover,
+.gift-link:hover { text-decoration: underline; }
+
+
+/* ---------- Category group heading -----------------------------------
+ * <section class="category-group"><h3>...</h3>...</section> on
+ * shareables.html — a sub-grouping inside a content section.
+ * --------------------------------------------------------------------- */
+.category-group h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 450;
+  font-variation-settings: 'opsz' 96, 'SOFT' 50;
+  font-size: clamp(20px, 2.2vw, 26px);
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  padding-bottom: 8px;
+  margin: 32px 0 16px;
+  border-bottom: 1px solid var(--rule);
+}
+.category-group:first-of-type h3 { margin-top: 8px; }
 
 
 /* ---------- Accessibility -------------------------------------------- */
