@@ -1,9 +1,22 @@
 #!/usr/bin/env python3
 """Build jafner.com static site by injecting partials into source pages."""
 
+import os
 import re
 import shutil
+import stat
 from pathlib import Path
+
+
+def _force_remove(func, path, _exc):
+    """rmtree onerror handler: clear the read-only bit and retry.
+
+    OneDrive "Files On-Demand" leaves dehydrated files/dirs as read-only
+    reparse points, which os.rmdir/os.unlink refuse to delete. Clearing
+    the read-only attribute lets the delete go through.
+    """
+    os.chmod(path, stat.S_IWRITE)
+    func(path)
 
 ROOT    = Path(__file__).parent
 SRC     = ROOT / 'src'
@@ -11,12 +24,12 @@ COMMON  = ROOT / 'common'
 PUBLIC  = ROOT / 'public'
 
 # Partials
-nav    = (COMMON / 'nav.html').read_text()
-footer = (COMMON / 'footer.html').read_text()
+nav    = (COMMON / 'nav.html').read_text(encoding='utf-8')
+footer = (COMMON / 'footer.html').read_text(encoding='utf-8')
 
 # Clean and recreate public/
 if PUBLIC.exists():
-    shutil.rmtree(PUBLIC)
+    shutil.rmtree(PUBLIC, onerror=_force_remove)
 PUBLIC.mkdir()
 
 # Static assets that should be copied as-is (not processed)
@@ -43,12 +56,12 @@ for page in SRC.glob('*.html'):
         nav,
     )
 
-    html = (page.read_text()
+    html = (page.read_text(encoding='utf-8')
         .replace('<!--NAV-->', nav_with_active)
         .replace('<!--FOOTER-->', footer))
 
-    (PUBLIC / page_name).write_text(html)
+    (PUBLIC / page_name).write_text(html, encoding='utf-8')
     pages_built += 1
     print(f'  built {page_name}')
 
-print(f'\n✓ {pages_built} pages built into {PUBLIC}/')
+print(f'\nDone: {pages_built} pages built into {PUBLIC}/')
