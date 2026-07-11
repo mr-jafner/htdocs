@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Metal Route — a 70-album listening map</title>
+<meta name="description" content="A curated route through metal's family tree, one branch at a time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0d;--panel:#141417;--panel-2:#1b1b1f;
+    --bone:#e8e3d9;--muted:#8f897b;--faint:#635f56;
+    --line:rgba(232,227,217,.09);--line-strong:rgba(232,227,217,.16);--warn:#d98c3a;
+    --display:"Oswald","Arial Narrow",system-ui,sans-serif;
+    --body:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--bone);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  header{border-bottom:1px solid var(--line);padding:56px 0 30px;position:relative;overflow:hidden}
+  header::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(900px 300px at 15% -20%, rgba(224,102,47,.10), transparent 60%),
+               radial-gradient(700px 260px at 90% -10%, rgba(91,139,176,.10), transparent 60%)}
+  .eyebrow{font-family:var(--display);font-weight:500;letter-spacing:.42em;text-transform:uppercase;font-size:12px;color:var(--muted);margin:0 0 14px}
+  h1{font-family:var(--display);font-weight:700;letter-spacing:.01em;line-height:.96;font-size:clamp(44px,9vw,84px);margin:0;text-transform:uppercase}
+  h1 .thin{font-weight:300;color:var(--muted)}
+  .lede{max-width:60ch;color:#cfc9bd;margin:20px 0 0;font-size:17px}
+  .lede b{color:var(--bone);font-weight:600}
+
+  .progress{display:flex;align-items:baseline;gap:14px;margin-top:26px;flex-wrap:wrap}
+  .progress .num{font-family:var(--display);font-weight:600;font-size:40px;line-height:1}
+  .progress .num small{font-size:18px;color:var(--muted);font-weight:400}
+  .bar{flex:1;min-width:180px;height:7px;background:var(--panel-2);border-radius:99px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e0662f,#d4af4f);border-radius:99px;transition:width .6s ease}
+  .progress .lbl{font-size:13px;color:var(--muted)}
+  .progress.hide{display:none}
+
+  .controls{position:sticky;top:0;z-index:20;background:rgba(11,11,13,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:14px 0}
+  .controls .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .search{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line-strong);border-radius:8px;padding:9px 12px}
+  .search input{all:unset;flex:1;color:var(--bone);font-size:14px}
+  .search input::placeholder{color:var(--faint)}
+  .search svg{opacity:.5;flex:none}
+  select{appearance:none;background:var(--panel);color:var(--bone);border:1px solid var(--line-strong);border-radius:8px;padding:9px 30px 9px 12px;font-size:14px;font-family:var(--body);cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238f897b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 11px center}
+  .toggle{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);cursor:pointer;background:var(--panel);border:1px solid var(--line-strong);border-radius:8px;padding:9px 12px;user-select:none}
+  .toggle input{accent-color:#e0662f}
+  .btn{font-family:var(--body);font-size:13px;color:var(--bone);background:var(--panel);border:1px solid var(--line-strong);border-radius:8px;padding:9px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:border-color .15s,background .15s}
+  .btn:hover{border-color:#e0662f;background:#1d1712}
+  .btn svg{opacity:.7}
+
+  .legend{display:flex;gap:7px;flex-wrap:wrap;padding:16px 0 4px}
+  .chip{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:5px 11px 5px 9px;cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+  .chip .dot{width:9px;height:9px;border-radius:2px;flex:none}
+  .chip:hover{color:var(--bone);border-color:var(--line-strong)}
+  .chip.active{color:var(--bg);font-weight:600}
+  .legend-note{width:100%;font-size:12px;color:var(--faint);margin-top:4px}
+
+  .meta-row{display:flex;justify-content:space-between;align-items:baseline;padding:22px 0 6px;color:var(--muted);font-size:13px;flex-wrap:wrap;gap:8px}
+  .clear{background:none;border:none;color:var(--warn);font-size:13px;cursor:pointer;padding:0;display:none}
+  .clear.show{display:inline}
+
+  .route{position:relative;padding:8px 0 80px;min-height:120px}
+  .route.has-spine::before{content:"";position:absolute;left:23px;top:0;bottom:70px;width:2px;background:linear-gradient(var(--line-strong),var(--line));z-index:0}
+  @media(max-width:640px){.route.has-spine::before{left:15px}}
+
+  .stop{position:relative;display:grid;grid-template-columns:48px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);z-index:1}
+  @media(max-width:640px){.stop{grid-template-columns:32px 1fr;gap:11px}}
+  .marker{position:relative;display:flex;justify-content:center;padding-top:3px}
+  .marker .node{width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--fam);box-shadow:0 0 0 4px var(--bg);position:relative;z-index:2}
+  .stop.done .node{background:var(--fam)}
+  .marker .ord{position:absolute;top:24px;font-family:var(--display);font-size:12px;color:var(--faint);font-weight:500}
+
+  .body{min-width:0}
+  .headline{display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
+  .title-line{min-width:0}
+  .album{font-family:var(--display);font-weight:600;font-size:21px;line-height:1.1;letter-spacing:.01em}
+  .artist{font-size:14px;color:var(--muted);margin-top:1px}
+  .artist .yr{color:var(--faint)}
+  .rating{font-family:var(--display);letter-spacing:.18em;font-size:15px;white-space:nowrap;flex:none;padding-top:3px}
+  .rating .on{color:#d4af4f}.rating .off{color:#333}
+  .rating.none{color:var(--faint);letter-spacing:0;font-family:var(--body);font-size:12px;font-style:italic}
+
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+  .tag{font-size:11px;letter-spacing:.03em;padding:3px 8px;border-radius:4px;border:1px solid var(--line-strong)}
+  .tag.fam{color:var(--fam);border-color:color-mix(in srgb,var(--fam) 40%,transparent)}
+  .tag.region{color:var(--muted)}
+  .tag.flag{color:var(--bg);font-weight:600;border:none}
+  .tag.regional{background:#5b8bb0}.tag.detour{background:#d4af4f}.tag.baggage{background:var(--warn)}
+
+  .why{color:#c3bdb1;font-size:14px;margin-top:10px;max-width:72ch}
+
+  .empty{text-align:center;color:var(--muted);padding:64px 20px;font-size:15px}
+  .empty b{color:var(--bone)}
+  .empty.err{border:1px solid var(--line-strong);border-radius:12px;background:var(--panel);text-align:left;padding:26px 28px}
+  .empty.err h3{font-family:var(--display);color:var(--warn);margin:0 0 10px;font-size:18px;letter-spacing:.02em}
+  .empty.err code{background:#000;padding:2px 6px;border-radius:4px;color:#e0a062;font-size:13px}
+  .empty.err ol{margin:10px 0 0;padding-left:20px;line-height:1.7}
+
+  footer{border-top:1px solid var(--line);padding:30px 0 60px;color:var(--faint);font-size:12.5px}
+
+  :focus-visible{outline:2px solid #e0662f;outline-offset:2px;border-radius:4px}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">A listening map</p>
+    <h1>The Metal <span class="thin">Route</span></h1>
+    <p class="lede">Metal isn't one thing — it's a tree. This is a route through it: <b>70 albums</b>, roughly in the order the branches split off, from the 1970 big bang to the underground still mutating today. Follow the line down. Each stop is colored by the branch it belongs to.</p>
+    <div class="progress" id="progress">
+      <div class="num" id="pnum">0<small>/0</small></div>
+      <div class="bar"><i id="pbar"></i></div>
+      <div class="lbl">listened so far</div>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap">
+    <div class="row">
+      <label class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input id="q" type="search" placeholder="Search artist, album, branch…" autocomplete="off">
+      </label>
+      <select id="region"><option value="">All regions</option></select>
+      <select id="sort">
+        <option value="route">Route order</option>
+        <option value="year">Year ↑</option>
+        <option value="year-d">Year ↓</option>
+        <option value="artist">Artist A–Z</option>
+      </select>
+      <button class="btn" id="export" title="Download the full route with blank tracking columns">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+        Export tracker (.csv)
+      </button>
+    </div>
+    <div class="legend" id="legend"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="meta-row">
+    <span id="count"></span>
+    <button class="clear" id="clear">Clear filters ✕</button>
+  </div>
+  <div class="route" id="route"><div class="empty">Loading the route…</div></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Curated route, 70 albums · branches color-coded by family · flags mark regional adds, detours, and artists with baggage worth knowing about. Export a blank tracker above to keep your own listening log.
+  </div>
+</footer>
+
+<script>
+/* ==================================================================
+   WHERE THE DATA COMES FROM
+   The page fetches a CSV and renders it — nothing is hardcoded.
+   Point this at whatever you want:
+     • a local file on your server (default below), or
+     • a Google "Publish to web → CSV" URL, or any URL that returns CSV.
+   Columns are matched by header NAME (case-insensitive, fuzzy), so
+   the exact order doesn't matter. Recognized: order, year, artist,
+   album, branch, region, why, rating. Any other column (e.g. Notes)
+   is ignored and never displayed.
+
+   NOTE: fetch() needs the page served over http(s). Opening the raw
+   file with file:// will be blocked by the browser — serve it via
+   httpd (which you already do) and it just works.
+================================================================== */
+const DATA_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9GzF7G2wM_hknQhnoxScgmymeeHldQfDN-F8Xx6ELs143J41NkGEeL4q5ulOlqYW-50iPZJj5j4V/pub?gid=0&single=true&output=csv";
+
+/* branch string -> {family label, color} */
+const FAMILIES = [
+  ["Proto / roots","#8a7f6a",["Roots","Roots / Extreme"]],
+  ["Classic / NWOBHM","#b9c2cc",["Heavy Metal","NWOBHM"]],
+  ["Glam","#cf6f9e",["Glam"]],
+  ["Thrash","#e0662f",["Thrash"]],
+  ["Death / grind","#b23a3a",["Death","Grind","Black / Death","Blackened Death"]],
+  ["Black","#5b8bb0",["Black","Black / Avant"]],
+  ["Doom / sludge","#8a6bab",["Doom","Doom / Stoner","Sludge / Prog"]],
+  ["Industrial","#4a9c9c",["Industrial"]],
+  ["Groove","#d09a3c",["Groove"]],
+  ["Gothic","#9c4f6b",["Gothic"]],
+  ["Melodic death","#6fa663",["Melodic Death"]],
+  ["Power / prog","#d4af4f",["Power / Prog"]],
+  ["Nu metal","#a8b84a",["Nu Metal"]],
+  ["Post-metal","#6d7f96",["Post-Metal"]],
+  ["Metalcore","#d47a3a",["Metalcore"]],
+  ["Djent","#7fa5b3",["Djent"]],
+  ["Experimental","#9a8fb0",["Drone / Experimental"]],
+  ["Modern","#cfc8bb",["Modern"]],
+];
+const BRANCH_MAP={};
+FAMILIES.forEach(([label,color,branches])=>branches.forEach(b=>BRANCH_MAP[b]={label,color}));
+const fam=b=>BRANCH_MAP[b]||{label:b,color:"#8f897b"};
+
+/* ---------- CSV parsing (RFC-4180-ish, handles quoted commas) ---------- */
+function splitCSV(text){
+  const rows=[];let i=0,f="",row=[],inQ=false;
+  const push=()=>{row.push(f);f="";};
+  const end=()=>{push();rows.push(row);row=[];};
+  while(i<text.length){const c=text[i];
+    if(inQ){if(c==='"'){if(text[i+1]==='"'){f+='"';i++;}else inQ=false;}else f+=c;}
+    else{if(c==='"')inQ=true;else if(c===',')push();else if(c==='\n')end();else if(c!=='\r')f+=c;}
+    i++;
+  }
+  if(f.length||row.length)end();
+  return rows;
+}
+function mapHeaders(header){
+  const idx={};
+  header.forEach((h,i)=>{
+    const k=h.toLowerCase();
+    if(idx.order==null&&/order|^#|rank/.test(k))idx.order=i;
+    else if(idx.year==null&&/year/.test(k))idx.year=i;
+    else if(idx.artist==null&&/artist|band/.test(k))idx.artist=i;
+    else if(idx.album==null&&/album|title|record/.test(k))idx.album=i;
+    else if(idx.branch==null&&/branch|genre|style/.test(k))idx.branch=i;
+    else if(idx.region==null&&/region|country/.test(k))idx.region=i;
+    else if(idx.why==null&&/why|reason|note.*here|blurb/.test(k))idx.why=i;
+    else if(idx.rating==null&&/rating|score|stars/.test(k))idx.rating=i;
+  });
+  return idx;
+}
+function toObjects(text){
+  const raw=splitCSV(text).filter(r=>r.length&&r.some(c=>c&&c.trim()!==""));
+  if(!raw.length)return[];
+  const idx=mapHeaders(raw[0]);
+  const get=(r,key)=>idx[key]!=null?(r[idx[key]]||"").trim():"";
+  return raw.slice(1).map((r,i)=>{
+    const rt=get(r,"rating");
+    const ratingNum=rt!==""&&!isNaN(+rt)?+rt:null;
+    const branch=get(r,"branch");
+    return {
+      order:+(get(r,"order")||i+1),
+      year:+get(r,"year")||"",
+      artist:get(r,"artist"),album:get(r,"album"),
+      branch,region:get(r,"region"),why:get(r,"why"),
+      rating:ratingNum,fam:fam(branch)
+    };
+  }).filter(o=>o.artist||o.album);
+}
+
+/* ---------- state ---------- */
+const state={q:"",region:"",sort:"route",families:new Set()};
+let rows=[],hasRatings=false;
+const $=s=>document.querySelector(s);
+const routeEl=$("#route"),countEl=$("#count"),clearEl=$("#clear");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- load ---------- */
+fetch(DATA_URL,{cache:"no-store"})
+  .then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
+  .then(txt=>{
+    rows=toObjects(txt);
+    if(!rows.length)throw new Error("No rows parsed");
+    hasRatings=rows.some(r=>r.rating!=null);
+    boot();
+  })
+  .catch(err=>showError(err));
+
+function showError(err){
+  $("#progress").classList.add("hide");
+  routeEl.classList.remove("has-spine");
+  routeEl.innerHTML=
+    '<div class="empty err"><h3>Couldn\'t load the route data</h3>'+
+    '<p>The page tried to fetch <code>'+esc(DATA_URL)+'</code> and got: <code>'+esc(err.message)+'</code>.</p>'+
+    '<ol><li>Make sure <code>metal_route.csv</code> sits in the same folder as this page.</li>'+
+    '<li>View it over <code>http(s)://</code> — not by double-clicking the file (browsers block <code>file://</code> fetches).</li>'+
+    '<li>To pull from a Google Sheet instead, set <code>DATA_URL</code> to a "Publish to web → CSV" link.</li></ol></div>';
+}
+
+function boot(){
+  buildLegend();buildRegions();buildProgress();render();
+  $("#q").addEventListener("input",e=>{state.q=e.target.value;render();});
+  $("#region").addEventListener("change",e=>{state.region=e.target.value;render();});
+  $("#sort").addEventListener("change",e=>{state.sort=e.target.value;render();});
+  $("#export").addEventListener("click",exportTracker);
+  clearEl.addEventListener("click",()=>{
+    state.q="";state.region="";state.families.clear();
+    $("#q").value="";$("#region").value="";render();
+  });
+}
+
+function buildProgress(){
+  if(!hasRatings){$("#progress").classList.add("hide");return;}
+  const done=rows.filter(r=>r.rating!=null).length;
+  $("#pnum").innerHTML=done+'<small>/'+rows.length+'</small>';
+  requestAnimationFrame(()=>{$("#pbar").style.width=(done/rows.length*100)+"%";});
+}
+
+function buildLegend(){
+  const present=new Set(rows.map(r=>r.fam.label));
+  const seen=new Set(),html=[];
+  FAMILIES.forEach(([label,color])=>{
+    if(present.has(label)&&!seen.has(label)){seen.add(label);
+      html.push('<button class="chip" data-fam="'+esc(label)+'" style="--c:'+color+'"><span class="dot" style="background:'+color+'"></span>'+esc(label)+'</button>');
+    }
+  });
+  html.push('<div class="legend-note">Tap a branch to filter · tap again to remove</div>');
+  $("#legend").innerHTML=html.join("");
+  $("#legend").querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+    const f=c.dataset.fam;
+    state.families.has(f)?state.families.delete(f):state.families.add(f);
+    render();
+  }));
+}
+function buildRegions(){
+  const regs=[...new Set(rows.map(r=>r.region).filter(Boolean))].sort();
+  $("#region").innerHTML='<option value="">All regions</option>'+regs.map(r=>'<option>'+esc(r)+'</option>').join("");
+}
+
+function flags(why){
+  const out=[];
+  if(/^REGIONAL ADD/i.test(why))out.push(["Regional add","regional"]);
+  if(/^DETOUR/i.test(why))out.push(["Detour","detour"]);
+  if(/BAGGAGE/i.test(why))out.push(["Baggage","baggage"]);
+  return out;
+}
+function ratingHTML(r){
+  if(!hasRatings)return"";
+  if(r.rating==null)return'<span class="rating none">not yet</span>';
+  let s="";for(let i=1;i<=5;i++)s+='<span class="'+(i<=r.rating?"on":"off")+'">●</span>';
+  return'<span class="rating" title="'+r.rating+' / 5">'+s+'</span>';
+}
+
+function render(){
+  let list=rows.slice();
+  const q=state.q.trim().toLowerCase();
+  if(q)list=list.filter(r=>(r.artist+" "+r.album+" "+r.branch+" "+r.region).toLowerCase().includes(q));
+  if(state.region)list=list.filter(r=>r.region===state.region);
+  if(state.families.size)list=list.filter(r=>state.families.has(r.fam.label));
+
+  const s=state.sort;
+  if(s==="year")list.sort((a,b)=>a.year-b.year||a.order-b.order);
+  else if(s==="year-d")list.sort((a,b)=>b.year-a.year||a.order-b.order);
+  else if(s==="artist")list.sort((a,b)=>a.artist.localeCompare(b.artist));
+  else list.sort((a,b)=>a.order-b.order);
+
+  countEl.textContent=list.length+(list.length===1?" album":" albums")+(list.length!==rows.length?" of "+rows.length:"");
+  clearEl.classList.toggle("show",!!(q||state.region||state.families.size));
+
+  $("#legend").querySelectorAll(".chip").forEach(c=>{
+    const on=state.families.has(c.dataset.fam);
+    c.classList.toggle("active",on);
+    c.style.background=on?c.style.getPropertyValue("--c"):"";
+    c.style.borderColor=on?c.style.getPropertyValue("--c"):"";
+  });
+
+  if(!list.length){
+    routeEl.classList.remove("has-spine");
+    routeEl.innerHTML='<div class="empty">No albums match. <b>Loosen a filter.</b></div>';
+    return;
+  }
+  routeEl.classList.add("has-spine");
+  routeEl.innerHTML=list.map(r=>{
+    const fl=flags(r.why).map(([t,cls])=>'<span class="tag flag '+cls+'">'+t+'</span>').join("");
+    return '<div class="stop'+(r.rating!=null?" done":"")+'" style="--fam:'+r.fam.color+'">'+
+      '<div class="marker"><span class="node"></span><span class="ord">'+String(r.order).padStart(2,"0")+'</span></div>'+
+      '<div class="body"><div class="headline"><div class="title-line">'+
+        '<div class="album">'+esc(r.album)+'</div>'+
+        '<div class="artist">'+esc(r.artist)+(r.year?' <span class="yr">· '+r.year+'</span>':'')+'</div>'+
+      '</div>'+ratingHTML(r)+'</div>'+
+      '<div class="tags"><span class="tag fam">'+esc(r.fam.label)+'</span>'+
+        (r.region?'<span class="tag region">'+esc(r.region)+'</span>':'')+fl+'</div>'+
+      '<div class="why">'+esc(r.why)+'</div></div></div>';
+  }).join("");
+}
+
+/* ---------- export a blank tracker template ---------- */
+function csvCell(v){v=v==null?"":String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}
+function exportTracker(){
+  const cols=["Order","Year","Artist","Album","Branch","Region","Why it's here","Listened Date","Rating (1-5)","Notes"];
+  const lines=[cols.join(",")];
+  rows.slice().sort((a,b)=>a.order-b.order).forEach(r=>{
+    lines.push([r.order,r.year,r.artist,r.album,r.branch,r.region,r.why,"","",""].map(csvCell).join(","));
+  });
+  const blob=new Blob(["\ufeff"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="metal_route_tracker.csv";document.body.appendChild(a);a.click();
+  a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+</script>
+</body>
+</html>
