@@ -82,9 +82,11 @@
   .album{font-family:var(--display);font-weight:600;font-size:21px;line-height:1.1;letter-spacing:.01em}
   .artist{font-size:14px;color:var(--muted);margin-top:1px}
   .artist .yr{color:var(--faint)}
-  .rating{font-family:var(--display);letter-spacing:.18em;font-size:15px;white-space:nowrap;flex:none;padding-top:3px}
+  .rating{font-family:var(--display);letter-spacing:.18em;font-size:15px;white-space:nowrap;}
   .rating .on{color:#d4af4f}.rating .off{color:#333}
   .rating.none{color:var(--faint);letter-spacing:0;font-family:var(--body);font-size:12px;font-style:italic}
+  .rating-wrap{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:3px}
+  .listened{font-size:11px;color:var(--faint);letter-spacing:.02em}
 
   .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
   .tag{font-size:11px;letter-spacing:.03em;padding:3px 8px;border-radius:4px;border:1px solid var(--line-strong)}
@@ -228,6 +230,7 @@ function mapHeaders(header){
     else if(idx.region==null&&/region|country/.test(k))idx.region=i;
     else if(idx.why==null&&/why|reason|note.*here|blurb/.test(k))idx.why=i;
     else if(idx.rating==null&&/rating|score|stars/.test(k))idx.rating=i;
+    else if(idx.date==null&&/listened|date/.test(k))idx.date=i;
   });
   return idx;
 }
@@ -245,7 +248,7 @@ function toObjects(text){
       year:+get(r,"year")||"",
       artist:get(r,"artist"),album:get(r,"album"),
       branch,region:get(r,"region"),why:get(r,"why"),
-      rating:ratingNum,fam:fam(branch)
+      rating:ratingNum,date:get(r,"date"),fam:fam(branch)
     };
   }).filter(o=>o.artist||o.album);
 }
@@ -330,7 +333,8 @@ function ratingHTML(r){
   if(!hasRatings)return"";
   if(r.rating==null)return'<span class="rating none">not yet</span>';
   let s="";for(let i=1;i<=5;i++)s+='<span class="'+(i<=r.rating?"on":"off")+'">●</span>';
-  return'<span class="rating" title="'+r.rating+' / 5">'+s+'</span>';
+  const date=r.date?'<span class="listened">'+esc(r.date)+'</span>':"";
+  return'<div class="rating-wrap"><span class="rating" title="'+r.rating+' / 5">'+s+'</span>'+date+'</div>';
 }
 
 function render(){
