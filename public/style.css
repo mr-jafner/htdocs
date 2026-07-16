@@ -616,6 +616,116 @@ article.toc_item h4 {
 .category-group:first-of-type h3 { margin-top: 8px; }
 
 
+/* ---------- AI content disclosure tag -------------------------------
+ * Corner badge injected by buildpages.py from an <!--AI-TAG:N--> marker.
+ * Neutral Geist-Mono pill (like .topnav) + a colored dot that encodes
+ * the level. Hover / tap / keyboard-focus reveals the card. All wording
+ * lives in AI_LEVELS in buildpages.py — this is styling only.
+ * ------------------------------------------------------------------- */
+.ai-tag {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  font-family: 'Geist Mono', monospace;
+}
+
+.ai-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: help;
+  user-select: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.ai-tag-chip:hover,
+.ai-tag:focus-within .ai-tag-chip {
+  border-color: var(--accent-soft);
+  color: var(--ink);
+}
+
+.ai-tag-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+}
+.ai-tag[data-ai-level="1"] .ai-tag-dot { background: var(--moss); }
+.ai-tag[data-ai-level="2"] .ai-tag-dot { background: var(--accent); }
+.ai-tag[data-ai-level="3"] .ai-tag-dot { background: var(--gold); }
+.ai-tag[data-ai-level="4"] .ai-tag-dot { background: #9a3b2f; }
+
+/* the pop-up card */
+.ai-tag-card {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(15, 40, 71, 0.14);
+  font-family: 'Geist', system-ui, sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+}
+.ai-tag:hover .ai-tag-card,
+.ai-tag:focus-within .ai-tag-card {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.ai-tag-card strong {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 40, 'SOFT' 50;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.ai-tag-card .ai-tag-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.ai-tag-card .ai-tag-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule-soft);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+.ai-tag-card .ai-tag-row b {
+  font-family: 'Geist Mono', monospace;
+  font-weight: 400;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 640px) {
+  .ai-tag { top: 14px; right: 14px; }
+  .ai-tag-card { width: 220px; }
+}
+
+
 /* ---------- Accessibility -------------------------------------------- */
 :focus-visible {
   outline: 2px solid var(--accent);
